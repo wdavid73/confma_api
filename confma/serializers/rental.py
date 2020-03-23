@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from confecciones_maribel_api.confma.models import Rental
+from ..models import Rental
 
 
 class RentalSerializer(serializers.HyperlinkedModelSerializer):

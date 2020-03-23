@@ -1,54 +1,23 @@
 from rest_framework import viewsets
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.views import APIView
 
-from .models import Client, Rental, QuotationClient, Quotation, Cloth
-from .serializers2 import ClientSerializer, ClothSerializer, RentalSerializer, \
-    QuotationClientSerializer, QuotationSerializer
-
-
-@api_view(['POST'])
-def delete_log(request, id):
-    if request.method == 'POST':
-        return Response({'message': 'DELETE LOG IN POST', 'id': id})
-    else:
-        return Response({'message': 'NOTHING'})
-
-
-class ClientList(APIView):
-    def get(self, request):
-        clients = Client.objects.filter(state=1)
-        serializer = ClientSerializer(clients, many=True, context={'request': request})
-        return Response({"clients": serializer.data})
-
-    def post(self, request):
-        print("POST")
-        message = "POST"
-        return Response({'message': message, 'request': request})
-
-    def put(self, request):
-        message = "PUT"
-        return Response({'message': message})
-
-    def delete(self, request):
-        message = "DELETE PERMANENT"
-        return Response({'message': message})
+from .models import Rental, QuotationClient, Quotation, Cloth, Client
+from .serializers import client, cloth, rental, quotation
+from .serializers2 import QuotationClientSerializer
 
 
 class ClientViewSet(viewsets.ModelViewSet):
     queryset = Client.objects.filter(state=1)
-    serializer_class = ClientSerializer
+    serializer_class = client.ClientSerializer
 
 
 class ClothViewSet(viewsets.ModelViewSet):
     queryset = Cloth.objects.filter(state=1)
-    serializer_class = ClothSerializer
+    serializer_class = cloth.ClothSerializer
 
 
 class QuotationViewSet(viewsets.ModelViewSet):
     queryset = Quotation.objects.filter(state=1)
-    serializer_class = QuotationSerializer
+    serializer_class = quotation.QuotationSerializer
 
 
 class QuotationClientViewSet(viewsets.ModelViewSet):
@@ -58,4 +27,4 @@ class QuotationClientViewSet(viewsets.ModelViewSet):
 
 class RentalViewSet(viewsets.ModelViewSet):
     queryset = Rental.objects.filter(state=1)
-    serializer_class = RentalSerializer
+    serializer_class = rental.RentalSerializer

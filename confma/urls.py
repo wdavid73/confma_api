@@ -1,9 +1,8 @@
-from django.conf.urls import url
 from django.urls import path, include
 from rest_framework import routers
 
 from . import views2
-from .views import client
+from .views.client import ClientViews, ClientDetailView, delete_log
 
 router = routers.DefaultRouter()
 router.register(r'client', views2.ClientViewSet)
@@ -14,7 +13,11 @@ router.register(r'rental', views2.RentalViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    url(r'^clients/', client.ClientViews.as_view(), name='client'),
-    path('clients_delete/<int:id>/', client.delete_log, name='client_delete'),
+    path('clients/', ClientViews.as_view(), name="client"),
+    path('clients/<int:_id>/', ClientDetailView.as_view(), name="client_detail"),
+    path('clients_delete/<int:_id>/', delete_log, name='client_delete'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
+
+# path('snippets/', views.SnippetList.as_view()),
+# path('snippets/<int:pk>/', views.SnippetDetail.as_view()),
