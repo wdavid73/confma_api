@@ -2,9 +2,10 @@ from django.urls import path, include
 from rest_framework import routers
 
 from . import views2
-from .views import client, cloth, rental
+from .views import client, cloth, rental, quotation
 from .views.client import ClientViews, ClientDetailView
 from .views.cloth import ClothView, ClothDetailView
+from .views.quotation import QuotationDetailView, QuotationView
 from .views.rental import RentalDetailView, RentalView
 
 router = routers.DefaultRouter()
@@ -28,6 +29,10 @@ urlpatterns = [
     path('rentals/', RentalView.as_view(), name="rental"),
     path('rentals/<int:_id>/', RentalDetailView.as_view(), name="rental_detail"),
     path('rentals/delete/<int:_id>/', rental.delete_log, name='rental_delete'),
+
+    path('quotations/', QuotationView.as_view(), name="quotation"),
+    path('quotations/<int:_id>/', QuotationDetailView.as_view(), name="quotation_detail"),
+    path('quotations/delete/<int:_id>/', quotation.delete_log, name='quotation_delete'),
 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

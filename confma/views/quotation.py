@@ -5,56 +5,55 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ..models import Rental
-from ..serializers.rental import RentalSerializer
+from ..models import Quotation
+from ..serializers.quotation import QuotationSerializer
 
 
-class RentalView(APIView):
+class QuotationView(APIView):
     def get(self, request):
-        rentals = Rental.objects.filter(state=1)
-        serializer = RentalSerializer(rentals, many=True, context={'request': request})
-        print(serializer)
-        return Response({'rentals': serializer.data})
+        print("GET")
+        quotation = Quotation.objects.filter(state=1)
+        serializer = QuotationSerializer(quotation, many=True, context={'request': request})
+        return Response({"quotation": serializer.data})
 
     def post(self, request):
-        serializer = RentalSerializer(data=request.data, context={'request': request})
+        serializer = QuotationSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class RentalDetailView(APIView):
+class QuotationDetailView(APIView):
     def get_object(self, _id):
         try:
-            return Rental.objects.get(id=_id)
-        except Rental.DoesNotExist:
+            return Quotation.objects.get(id=_id)
+        except Quotation.DoesNotExist:
             raise Http404
 
     def get(self, request, _id):
-        rental = self.get_object(_id)
-        serializer = RentalSerializer(rental, context={'request': request})
+        quotation = self.get_object(_id)
+        serializer = QuotationSerializer(quotation, context={'request': request})
         return Response(serializer.data)
 
     def put(self, request, _id):
-        rental = self.get_object(_id)
-        serializer = RentalSerializer(rental, data=request.data, context={'request': request})
+        quotation = self.get_object(_id)
+        serializer = QuotationSerializer(quotation, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, _id):
-        rental = self.get_object(_id)
-        rental.delete()
+        quotation = self.get_object(_id)
+        quotation.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['POST'])
 def delete_log(request, _id):
     if request.method == 'POST':
-        rental = get_object_or_404(Rental, id=_id)
-        rental.state = 0
-        rental.save()
+        quotation = get_object_or_404(Quotation, id=_id)
+        quotation.state = 0
+        quotation.save()
         return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)

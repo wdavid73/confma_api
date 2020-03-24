@@ -16,7 +16,7 @@ def delete_log(request, _id):
         cloth = get_object_or_404(Cloth, id=_id)
         cloth.state = 0
         cloth.save()
-        return Response({'message': 'Delete Successfully'})
+        return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 

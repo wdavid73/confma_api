@@ -15,7 +15,7 @@ def delete_log(request, _id):
         client = get_object_or_404(Client, id=_id)
         client.state = 0
         client.save()
-        return Response({'message': 'Delete Successfully'})
+        return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -52,9 +52,7 @@ class ClientDetailView(APIView):
         serializer = ClientSerializer(client, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
-            print("GOOD")
             return Response(serializer.data)
-        print("BAD")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, _id):
