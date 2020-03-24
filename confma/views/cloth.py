@@ -59,5 +59,7 @@ class ClothDetailView(APIView):
 
     def delete(self, request, _id):
         cloth = self.get_object(_id)
+        # cloth.state = 0
+        # cloth.save()
         cloth.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

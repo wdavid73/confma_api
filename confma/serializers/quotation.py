@@ -4,6 +4,9 @@ from ..models import Quotation
 
 
 class QuotationSerializer(serializers.HyperlinkedModelSerializer):
+    client = serializers.StringRelatedField(many=False)
+    cloth = serializers.StringRelatedField(many=False)
+
     class Meta:
         model = Quotation
         fields = ['url',
@@ -17,3 +20,4 @@ class QuotationSerializer(serializers.HyperlinkedModelSerializer):
                   'value_prints',
                   'cloth',
                   'client']
+

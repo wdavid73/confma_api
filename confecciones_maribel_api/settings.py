@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'confecciones_maribel_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'goykmhyl',
-        'USER': 'goykmhyl',
-        'PASSWORD': 'myM0jeTazQu8ijx6VQMt7Bfuu64KLCxS',
+        'NAME': 'ezthcyqp',
+        'USER': 'ezthcyqp',
+        'PASSWORD': 'DPQAjTCOLbJY5tPwEH4NUkdOhRhfv6qt',
         'HOST': 'drona.db.elephantsql.com',
         'PORT': 5432
     }

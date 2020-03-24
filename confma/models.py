@@ -92,7 +92,6 @@ class Rental(models.Model):
     state = models.SmallIntegerField(default=1, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    lookup_field = 'pk'
 
     def __str__(self):
         return "Date Now :{} , Date Return : {} , Price : {} , Client : {} , Cloth : {}" \

@@ -2,9 +2,10 @@ from django.urls import path, include
 from rest_framework import routers
 
 from . import views2
-from .views import client, cloth
-from .views.client import (ClientViews, ClientDetailView)
-from .views.cloth import (ClothView, ClothDetailView)
+from .views import client, cloth, rental
+from .views.client import ClientViews, ClientDetailView
+from .views.cloth import ClothView, ClothDetailView
+from .views.rental import RentalDetailView, RentalView
 
 router = routers.DefaultRouter()
 router.register(r'client', views2.ClientViewSet)
@@ -23,6 +24,10 @@ urlpatterns = [
     path('cloths/', ClothView.as_view(), name="cloth"),
     path('cloths/<int:_id>/', ClothDetailView.as_view(), name="cloth_detail"),
     path('cloths/delete/<int:_id>/', cloth.delete_log, name='client_delete'),
+
+    path('rentals/', RentalView.as_view(), name="rental"),
+    path('rentals/<int:_id>/', RentalDetailView.as_view(), name="rental_detail"),
+    path('rentals/delete/<int:_id>/', rental.delete_log, name='rental_delete'),
 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
