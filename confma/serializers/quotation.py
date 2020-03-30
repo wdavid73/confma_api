@@ -1,17 +1,20 @@
 from rest_framework import serializers
 
+from .links import quotation_link, cloth_link, client_link
 from ..models import Quotation
 
 
-class QuotationSerializer(serializers.HyperlinkedModelSerializer):
+class QuotationSerializer(serializers.ModelSerializer):
+    url = quotation_link
+    cloth = cloth_link
+    client = client_link
+
     class Meta:
         model = Quotation
-
         fields = ['url', 'id', 'value_cloth',
                   'value_work', 'value_threads', 'value_buttons',
                   'value_necks', 'value_embroidery', 'value_prints',
                   'cloth', 'client']
-
         extra_kwargs = {
             "value_cloth": {
                 "error_messages":

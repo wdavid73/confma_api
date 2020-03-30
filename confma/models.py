@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import DateField
+from django.urls import reverse
 
 list_size = [
     ('XS', 'XS'),
@@ -24,6 +25,12 @@ class Client(models.Model):
     def __str__(self):
         return "{} {} , {}".format(self.name, self.last_name, self.cellphone)
 
+    # def get_absolute_url(self):
+    #     return "/clients/%i/" % self.id
+
+    def get_absolute_url(self):
+        return reverse("confma:client_detail", kwargs={'_id': self.id})
+
     class Meta:
         db_table = "Client"
 
@@ -40,6 +47,9 @@ class Cloth(models.Model):
 
     def __str__(self):
         return "{} Talla : {}, Color : {}, Moda : {}".format(self.name, self.size, self.color, self.fashion)
+
+    def get_absolute_url(self):
+        return reverse("confma:cloth_detail", kwargs={'_id': self.id})
 
     class Meta:
         db_table = "Cloth"
@@ -63,6 +73,9 @@ class Quotation(models.Model):
         return "Value Cloth : {}, Value Work : {}, Value Threads : {}, Value Buttons : {}, Cloth : {}" \
             .format(self.value_cloth, self.value_work, self.value_threads, self.value_buttons, self.cloth)
 
+    def get_absolute_url(self):
+        return reverse("confma:quotation_detail", kwargs={'_id': self.id})
+
     class Meta:
         db_table = "Quotation"
 
@@ -77,6 +90,9 @@ class QuotationClient(models.Model):
 
     def __str__(self):
         return "Quotation : {} , Client : {}, Total : ${}".format(self.quotation, self.client, self.total)
+
+    def get_absolute_url(self):
+        return reverse("confma:quotation_client_detail", kwargs={'_id': self.id})
 
     class Meta:
         db_table = "Quotation_Client"
@@ -96,6 +112,9 @@ class Rental(models.Model):
     def __str__(self):
         return "Date Now :{} , Date Return : {} , Price : {} , Client : {} , Cloth : {}" \
             .format(self.date_now, self.date_now, self.price, self.client, self.cloth)
+
+    def get_absolute_url(self):
+        return reverse("confma:rental_detail", kwargs={'_id': self.id})
 
     class Meta:
         db_table = "Rental"

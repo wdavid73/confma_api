@@ -1,4 +1,3 @@
-from django.http import Http404
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -11,9 +10,9 @@ from ..serializers.cloth import ClothSerializer
 
 
 @api_view(['POST'])
-def delete_log(request, _id):
+def delete_log(request, id):
     if request.method == 'POST':
-        cloth = get_object_or_404(Cloth, id=_id)
+        cloth = get_object_or_404(Cloth, id=id)
         cloth.state = 0
         cloth.save()
         return Response(status=status.HTTP_200_OK)
@@ -37,28 +36,21 @@ class ClothView(APIView):
 
 
 class ClothDetailView(APIView):
-    def get_object(self, _id):
-        try:
-            print(Cloth.objects.get(id=_id))
-            return Cloth.objects.get(id=_id)
-        except Cloth.DoesNotExist:
-            raise Http404
-
-    def get(self, request, _id):
-        Cloth = self.get_object(_id)
-        serializer = ClothSerializer(Cloth, context={'request': request})
+    def get(self, request, id):
+        cloth = get_object_or_404(Cloth, id)
+        serializer = ClothSerializer(cloth, context={'request': request})
         return Response(serializer.data)
 
-    def put(self, request, _id):
-        cloth = self.get_object(_id)
+    def put(self, request, id):
+        cloth = get_object_or_404(Cloth, id)
         serializer = ClothSerializer(cloth, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, _id):
-        cloth = self.get_object(_id)
+        cloth = get_object_or_404(Cloth, id)
         # cloth.state = 0
         # cloth.save()
         cloth.delete()

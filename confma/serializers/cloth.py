@@ -1,9 +1,12 @@
 from rest_framework import serializers
 
+from .links import cloth_link
 from ..models import Cloth
 
 
-class ClothSerializer(serializers.HyperlinkedModelSerializer):
+class ClothSerializer(serializers.ModelSerializer):
+    url = cloth_link
+
     class Meta:
         model = Cloth
         fields = ['url', 'id', 'name', 'color', 'size', 'fashion', 'image']

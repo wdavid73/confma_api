@@ -1,4 +1,3 @@
-from django.http import Http404
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -19,33 +18,29 @@ class RentalView(APIView):
     def post(self, request):
         serializer = RentalSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
+            print(serializer)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class RentalDetailView(APIView):
-    def get_object(self, _id):
-        try:
-            return Rental.objects.get(id=_id)
-        except Rental.DoesNotExist:
-            raise Http404
 
-    def get(self, request, _id):
-        rental = self.get_object(_id)
+    def get(self, request, id):
+        rental = get_object_or_404(Rental, id=id)
         serializer = RentalSerializer(rental, context={'request': request})
         return Response(serializer.data)
 
-    def put(self, request, _id):
-        rental = self.get_object(_id)
+    def put(self, request, id):
+        rental = get_object_or_404(Rental, id=id)
         serializer = RentalSerializer(rental, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, _id):
-        rental = self.get_object(_id)
+    def delete(self, request, id):
+        rental = get_object_or_404(Rental, id=id)
         rental.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 

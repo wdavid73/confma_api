@@ -1,8 +1,7 @@
 from rest_framework import viewsets
 
 from .models import Rental, QuotationClient, Quotation, Cloth, Client
-from .serializers import client, cloth, rental, quotation
-from .serializers2 import QuotationClientSerializer
+from .serializers import client, cloth, rental, quotation, quotation_client
 
 
 class ClientViewSet(viewsets.ModelViewSet):
@@ -22,7 +21,7 @@ class QuotationViewSet(viewsets.ModelViewSet):
 
 class QuotationClientViewSet(viewsets.ModelViewSet):
     queryset = QuotationClient.objects.filter(state=1)
-    serializer_class = QuotationClientSerializer
+    serializer_class = quotation_client.QuotationClientSerializer
 
 
 class RentalViewSet(viewsets.ModelViewSet):

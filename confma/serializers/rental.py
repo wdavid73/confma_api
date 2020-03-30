@@ -1,9 +1,16 @@
 from rest_framework import serializers
 
+from .client import ClientSerializer
+from .cloth import ClothSerializer
+from .links import rental_link
 from ..models import Rental
 
 
-class RentalSerializer(serializers.HyperlinkedModelSerializer):
+class RentalSerializer(serializers.ModelSerializer):
+    url = rental_link
+    client = ClientSerializer(read_only=True, many=False)
+    cloth = ClothSerializer(read_only=True, many=False)
+
     class Meta:
         model = Rental
         fields = ['url', 'id', 'date_return', 'price', 'cloth', 'client']
