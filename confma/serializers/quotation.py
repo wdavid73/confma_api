@@ -1,13 +1,15 @@
 from rest_framework import serializers
 
-from .links import quotation_link, cloth_link, client_link
+from .client import ClientSerializer
+from .cloth import ClothSerializer
+from .links import quotation_link
 from ..models import Quotation
 
 
 class QuotationSerializer(serializers.ModelSerializer):
     url = quotation_link
-    cloth = cloth_link
-    client = client_link
+    client = ClientSerializer(read_only=True, many=False)
+    cloth = ClothSerializer(read_only=True, many=False)
 
     class Meta:
         model = Quotation

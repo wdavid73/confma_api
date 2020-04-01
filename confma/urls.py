@@ -1,6 +1,7 @@
 from django.urls import path, include
 from rest_framework import routers
 
+from . import views2
 from .views import client, cloth, rental, quotation, quotation_client
 from .views.client import ClientViews, ClientDetailView
 from .views.cloth import ClothView, ClothDetailView
@@ -11,7 +12,7 @@ from .views.rental import RentalDetailView, RentalView
 app_name = 'confma'
 router = routers.DefaultRouter()
 # router.register(r'client', views2.ClientViewSet)
-# router.register(r'cloth', views2.ClothViewSet)
+router.register(r'cloth', views2.ClothViewSet)
 # router.register(r'quotation', views2.QuotationViewSet)
 # router.register(r'quotation_client', views2.QuotationClientViewSet)
 # router.register(r'rental', views2.RentalViewSet)
@@ -27,7 +28,8 @@ urlpatterns = [
 
     path('cloths/', ClothView.as_view(), name="cloth"),
     path('cloths/<id>/', ClothDetailView.as_view(), name="cloth_detail"),
-    path('cloths/delete/<int:_id>/', cloth.delete_log, name='client_delete'),
+    path('cloths/delete/<int:_id>/', cloth.delete_log, name='cloth_delete'),
+    path('cloths/details/<int:_id>/', cloth.DetailsCloth, name='cloth_with_details'),
 
     path('rentals/', RentalView.as_view(), name="rental"),
     path('rentals/<id>/', RentalDetailView.as_view(), name="rental_detail"),
@@ -37,6 +39,7 @@ urlpatterns = [
     path('quotations/', QuotationView.as_view(), name="quotation"),
     path('quotations/<id>/', QuotationDetailView.as_view(), name="quotation_detail"),
     path('quotations/delete/<int:_id>/', quotation.delete_log, name='quotation_delete'),
+    path('quotations/find/<str:cloth_name>/', quotation.FindQuotations, name='quotation_find'),
 
     path('quotations_clients/', QuotationClientView.as_view(), name="quotation_client"),
     path('quotations_clients/<id>/', QuotationClientDetailView.as_view(), name="quotation_client_detail"),
