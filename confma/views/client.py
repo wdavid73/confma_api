@@ -8,16 +8,6 @@ from ..models import Client
 from ..serializers.client import ClientSerializer
 
 
-@api_view(['POST'])
-def delete_log(request, _id):
-    if request.method == 'POST':
-        client = get_object_or_404(Client, id=_id)
-        client.state = 0
-        client.save()
-        return Response(status=status.HTTP_200_OK)
-    return Response(status=status.HTTP_400_BAD_REQUEST)
-
-
 class ClientViews(APIView):
 
     def get(self, request):
@@ -52,3 +42,51 @@ class ClientDetailView(APIView):
         client = get_object_or_404(Client, id=id)
         client.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['POST'])
+def delete_log(request, _id):
+    if request.method == 'POST':
+        client = get_object_or_404(Client, id=_id)
+        client.state = 0
+        client.save()
+        return Response(status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def FindClient(request, _id):
+    if request.method == 'POST':
+        client = get_object_or_404(Client, id=_id)
+        serializer_client = ClientSerializer(client, context={'request': request})
+        rentals = getRentalClient(client, request)
+        quotations = getQuotationClient(client, request)
+        return Response(
+            {
+                'client': serializer_client.data,
+                'rentals': rentals,
+                'quotations': quotations
+            },
+            status=status.HTTP_200_OK
+        )
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+def getRentalClient(client, request):
+    from ..models import Rental
+    from ..serializers.rental import RentalSerializer
+    response = list()
+    for rental in Rental.objects.all().filter(state=1, client=client):
+        serializer = RentalSerializer(rental, context={'request': request})
+        response.append(serializer.data)
+    return response
+
+
+def getQuotationClient(client, request):
+    from ..models import QuotationClient
+    from ..serializers.quotation_client import QuotationClientSerializer
+    response = list()
+    for qc in QuotationClient.objects.all().filter(state=1, client=client):
+        serializer = QuotationClientSerializer(qc, context={'request': request})
+        response.append(serializer.data)
+    return response

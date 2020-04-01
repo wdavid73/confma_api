@@ -53,3 +53,13 @@ def delete_log(request, _id):
         rental.save()
         return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def RefundRental(request, _id):
+    rental = get_object_or_404(Rental, id=_id)
+    if request.method == 'POST':
+        rental.ifrental = 0
+        rental.save()
+        return Response(status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
