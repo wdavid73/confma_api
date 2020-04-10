@@ -7,13 +7,12 @@ from ..models import Rental
 
 
 class RentalSerializer(serializers.ModelSerializer):
-    url = rental_link
     client = ClientSerializer(read_only=True, many=False)
     cloth = ClothSerializer(read_only=True, many=False)
 
     class Meta:
         model = Rental
-        fields = ['url', 'id', 'date_return', 'price', 'cloth', 'client']
+        fields = ['id', 'date_return', 'price', 'cloth', 'client']
         extra_kwargs = {
             "price": {
                 "error_messages":

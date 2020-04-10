@@ -5,11 +5,10 @@ from ..models import Client
 
 
 class ClientSerializer(serializers.ModelSerializer):
-    url = client_link
 
     class Meta:
         model = Client
-        fields = ['url', 'id', 'name', 'last_name', 'address', 'phone', 'cellphone']
+        fields = ['id', 'name', 'last_name', 'address', 'phone', 'cellphone']
         extra_kwargs = {
             "name": {
                 "error_messages":

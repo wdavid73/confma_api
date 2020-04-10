@@ -10,18 +10,10 @@ from .views.quotation_client import QuotationClientView, QuotationClientDetailVi
 from .views.rental import RentalDetailView, RentalView
 
 app_name = 'confma'
-router = routers.DefaultRouter()
-# router.register(r'client', views2.ClientViewSet)
-router.register(r'cloth', views2.ClothViewSet)
-# router.register(r'quotation', views2.QuotationViewSet)
-# router.register(r'quotation_client', views2.QuotationClientViewSet)
-# router.register(r'rental', views2.RentalViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
 
     path('clients/', ClientViews.as_view(), name="client"),
-    # path('clients/<int:_id>/', ClientDetailView.as_view(), name="client_detail"),
     path('clients/<id>/', ClientDetailView.as_view(), name="client_detail"),
     path('clients/delete/<int:_id>/', client.delete_log, name='client_delete'),
     path('clients/find/<int:_id>/', client.FindClient, name='client_find'),
@@ -47,6 +39,3 @@ urlpatterns = [
 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
-
-# path('snippets/', views.SnippetList.as_view()),
-# path('snippets/<int:pk>/', views.SnippetDetail.as_view()),
