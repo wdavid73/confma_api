@@ -82,9 +82,9 @@ WSGI_APPLICATION = 'confecciones_maribel_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ezthcyqp',
-        'USER': 'ezthcyqp',
-        'PASSWORD': 'DPQAjTCOLbJY5tPwEH4NUkdOhRhfv6qt',
+        'NAME': 'ltxdnswb',
+        'USER': 'ltxdnswb',
+        'PASSWORD': 'AATDt-j_FHYCZbQpbC4HADrebKPZ50cv',
         'HOST': 'drona.db.elephantsql.com',
         'PORT': 5432
     }
@@ -140,7 +140,7 @@ REST_FRAMEWORK = {
     #     'rest_framework.renderers.JSONRenderer',
     # ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 5
 }
 
 CORS_ORIGIN_ALLOW_ALL = True

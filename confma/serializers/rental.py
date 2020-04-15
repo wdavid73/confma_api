@@ -7,7 +7,7 @@ from ..models import Rental
 
 
 class RentalSerializer(serializers.ModelSerializer):
-    client = ClientSerializer(read_only=True, many=False)
+    client = ClientSerializer(read_only=False, many=False)
     cloth = ClothSerializer(read_only=True, many=False)
 
     class Meta:
