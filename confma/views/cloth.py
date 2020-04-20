@@ -15,14 +15,19 @@ class ClothView(APIView):
 
     def get(self, request):
         cloths = Cloth.objects.filter(state=1)
-        serializer = ClothSerializer(cloths, many=True, context={'request': request})
+        serializer = ClothSerializer(
+            cloths, many=True, context={'request': request})
         return Response({"cloths": serializer.data})
 
     def post(self, request):
-        serializer = ClothSerializer(data=request.data, context={'request': request})
+        obj_image = request.FILES.get('file')
+        print(obj_image)
+        serializer = ClothSerializer(
+            data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -41,7 +46,8 @@ class ClothDetailView(APIView):
 
     def put(self, request, id):
         cloth = get_object_or_404(Cloth, id)
-        serializer = ClothSerializer(cloth, data=request.data, context={'request': request})
+        serializer = ClothSerializer(
+            cloth, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
