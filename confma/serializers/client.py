@@ -1,5 +1,5 @@
+from typing import Dict, Any
 from rest_framework import serializers
-
 from .links import client_link
 from ..models import Client
 

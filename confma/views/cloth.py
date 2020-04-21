@@ -20,8 +20,6 @@ class ClothView(APIView):
         return Response({"cloths": serializer.data})
 
     def post(self, request):
-        obj_image = request.FILES.get('file')
-        print(obj_image)
         serializer = ClothSerializer(
             data=request.data, context={'request': request})
         if serializer.is_valid():
