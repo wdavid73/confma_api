@@ -4,21 +4,19 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ..models import Rental
-from ..serializers.rental import RentalSerializer
+from ..models import Rental, Cloth
+from ..serializers.rental import RentalSerializer,ClothSerializer
 
 
 class RentalView(APIView):
     def get(self, request):
-        rentals = Rental.objects.filter(state=1)
-        serializer = RentalSerializer(rentals, many=True, context={'request': request})
-        print(serializer)
-        return Response({'rentals': serializer.data})
+    	rentals = Rental.objects.filter(state=1,ifrental=1)
+    	serializer = RentalSerializer(rentals, many=True, context={'request': request})
+    	return Response({'rentals': serializer.data})
 
     def post(self, request):
         serializer = RentalSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
-            print(serializer)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -63,3 +61,25 @@ def RefundRental(request, _id):
         rental.save()
         return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def IfNotRental(request):
+    rental = Rental.objects.filter(ifrental=0)
+    serializer = RentalSerializer(rental, many=True, context={'request': request})
+    return Response({'rental':serializer.data} , status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def ClothWithOutRental(request):
+    clothwithrental = Rental.objects.filter(state = 1, ifrental=1)
+    cloths_id = []
+    response = []
+    for cr in clothwithrental:
+        cloths_id.append(cr.cloth.id)
+    cloth = Cloth.objects.exclude(id__in = cloths_id)
+    for c in cloth:
+        serializer = ClothSerializer(c , context={'request' : request})
+        response.append(serializer.data)
+    return Response({'response' : response} , status=status.HTTP_200_OK)
+
+
+	

@@ -3,16 +3,27 @@ from rest_framework import serializers
 from .client import ClientSerializer
 from .cloth import ClothSerializer
 from .links import rental_link
-from ..models import Rental
+from ..models import Rental , Client , Cloth
 
 
 class RentalSerializer(serializers.ModelSerializer):
-    client = ClientSerializer(read_only=False, many=False)
-    cloth = ClothSerializer(read_only=True, many=False)
+    client = ClientSerializer(read_only=True)
+    clientId = serializers.PrimaryKeyRelatedField(
+        write_only=True,
+        queryset=Client.objects.filter(state=1),
+        source='client'
+    )
+    cloth = ClothSerializer(read_only=True)
+    clothId = serializers.PrimaryKeyRelatedField(
+        write_only=True,
+        queryset=Cloth.objects.filter(state=1),
+        source='cloth'
+    )
 
     class Meta:
         model = Rental
-        fields = ['id', 'date_return', 'price', 'cloth', 'client']
+        fields = ['id', 'date_return', 'price', 'ifrental',
+                  'cloth', 'clothId','client', 'clientId', ]
         extra_kwargs = {
             "price": {
                 "error_messages":

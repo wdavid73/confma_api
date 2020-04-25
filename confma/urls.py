@@ -27,6 +27,9 @@ urlpatterns = [
     path('rentals/<id>/', RentalDetailView.as_view(), name="rental_detail"),
     path('rentals/delete/<int:_id>/', rental.delete_log, name='rental_delete'),
     path('rentals/refund/<int:_id>/', rental.RefundRental, name='rental_refund'),
+    path('rentals_cloth/', rental.ClothWithOutRental, name="cloth_without_rental"),
+
+    
 
     path('quotations/', QuotationView.as_view(), name="quotation"),
     path('quotations/<id>/', QuotationDetailView.as_view(), name="quotation_detail"),
