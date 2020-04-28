@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -15,10 +16,13 @@ class RentalView(APIView):
     	return Response({'rentals': serializer.data})
 
     def post(self, request):
-        serializer = RentalSerializer(data=request.data, context={'request': request})
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        now = datetime.today()
+        date_object = datetime.strptime(request.data["date_return"], '%Y-%m-%d')
+        if  date_object > now and int(request.data["price"]) > 5000:
+            serializer = RentalSerializer(data=request.data, context={'request': request})
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

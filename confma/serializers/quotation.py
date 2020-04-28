@@ -3,20 +3,24 @@ from rest_framework import serializers
 from .client import ClientSerializer
 from .cloth import ClothSerializer
 from .links import quotation_link
-from ..models import Quotation
+from ..models import Quotation, Client , Cloth
 
 
 class QuotationSerializer(serializers.ModelSerializer):
     url = quotation_link
-    client = ClientSerializer(read_only=True, many=False)
-    cloth = ClothSerializer(read_only=True, many=False)
+    cloth = ClothSerializer(read_only=True)
+    clothId = serializers.PrimaryKeyRelatedField(
+        write_only=True,
+        queryset=Cloth.objects.filter(state=1),
+        source='cloth'
+    )
 
     class Meta:
         model = Quotation
         fields = ['url', 'id', 'value_cloth',
                   'value_work', 'value_threads', 'value_buttons',
                   'value_necks', 'value_embroidery', 'value_prints',
-                  'cloth', 'client']
+                  'cloth','clothId']
         extra_kwargs = {
             "value_cloth": {
                 "error_messages":
@@ -77,12 +81,6 @@ class QuotationSerializer(serializers.ModelSerializer):
                 "error_messages":
                     {
                         "required": "Please Select a Cloth for the Quotation",
-                    }
-            },
-            "client": {
-                "error_messages":
-                    {
-                        "required": "Please Select a Client for the Quotation",
                     }
             },
 

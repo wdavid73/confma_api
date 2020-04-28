@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from ..models import Quotation, Cloth
-from ..serializers.quotation import QuotationSerializer
+from ..serializers.quotation import QuotationSerializer,ClothSerializer
 
 
 class QuotationView(APIView):
@@ -15,12 +15,14 @@ class QuotationView(APIView):
         return Response({"quotation": serializer.data})
 
     def post(self, request):
-        if not ClothDuplicated(request.data['cloth']):
+        if not ClothDuplicated(request.data['clothId']):
             serializer = QuotationSerializer(data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response({'error': 'Cloth Duplicated in Quotations'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors , status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error' : 'Esta prenda ya ah sido cotizada'} , status = status.HTTP_406_NOT_ACCEPTABLE)
+        
 
 
 class QuotationDetailView(APIView):
@@ -72,14 +74,22 @@ def FindClothByName(cloth_name, request):
     cloth = Cloth.objects.filter(name=cloth_name, id__in=list(ClothWithOutQuotation().values_list('id', flat=True)))
     return cloth
 
-
-def ClothWithOutQuotation():
+@api_view(['GET'])
+def ClothWithOutQuotation(request):
     quotations = Quotation.objects.filter(state=1).values_list('cloth', flat=True)
     cloth_quotation = Cloth.objects.exclude(id__in=quotations)
-    return cloth_quotation
+    response = []
+    for c in cloth_quotation:
+        serializer = ClothSerializer(c , context={'request' : request})
+        response.append(serializer.data)
+    return Response({'response' : response} , status=status.HTTP_200_OK)
+    
 
 
 def ClothDuplicated(req):
     cloth = Cloth.objects.filter(id=req)
-    if Quotation.objects.filter(cloth__in=list(cloth)):
+    if len(Quotation.objects.filter(cloth__in = list(cloth))) > 0:
         return True
+    return False
+        
+    
