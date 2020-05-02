@@ -40,6 +40,7 @@ urlpatterns = [
     path('quotations_clients/', QuotationClientView.as_view(), name="quotation_client"),
     path('quotations_clients/<id>/', QuotationClientDetailView.as_view(), name="quotation_client_detail"),
     path('quotations_clients/delete/<int:_id>/', quotation_client.delete_log, name='qc_delete'),
+    path('quotations_clients/clientnotduplicated/<int:_id>/', quotation_client.ClientNotDuplicatedInQuotation, name='qc_client_not_duplicated'),
 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

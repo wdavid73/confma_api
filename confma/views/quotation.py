@@ -12,10 +12,15 @@ class QuotationView(APIView):
     def get(self, request):
         quotation = Quotation.objects.filter(state=1)
         serializer = QuotationSerializer(quotation, many=True, context={'request': request})
-        return Response({"quotation": serializer.data})
+        return Response({"quotations": serializer.data})
 
     def post(self, request):
         if not ClothDuplicated(request.data['clothId']):
+            total = getTotal(
+                request.data['value_work'], request.data['value_cloth'],request.data['value_buttons'],
+                request.data['value_threads'],request.data['value_necks'],
+                request.data['value_embroidery'],request.data['value_prints'])
+            request.data['total'] = str(total)
             serializer = QuotationSerializer(data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
@@ -91,5 +96,7 @@ def ClothDuplicated(req):
     if len(Quotation.objects.filter(cloth__in = list(cloth))) > 0:
         return True
     return False
-        
+
+def getTotal(vw,vc,vb,vt,vn,ve,vp):
+    return int(vw) + int(vc) + int(vb) + int(vt) + int(vn) + int(ve) + int(vp)
     

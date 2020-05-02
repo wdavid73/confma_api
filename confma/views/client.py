@@ -17,7 +17,10 @@ class ClientViews(APIView):
             clients, many=True, context={'request': request})
         return Response({"clients": serializer.data})
 
-    def post(self, request):
+    def post(self, request):       
+        #### Sobreescribiendo Campos #####
+            #request.data['name'] = 'Sowil'
+        #########
         serializer = ClientSerializer(
             data=request.data, context={'request': request})
         if serializer.is_valid():

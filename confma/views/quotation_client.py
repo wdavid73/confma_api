@@ -4,8 +4,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ..models import QuotationClient
-from ..serializers.quotation_client import QuotationClientSerializer
+from ..models import QuotationClient , Quotation , Client
+from ..serializers.quotation_client import QuotationClientSerializer, ClientSerializer
 
 
 class QuotationClientViewSet(viewsets.ModelViewSet):
@@ -25,6 +25,7 @@ class QuotationClientView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors , status=status.HTTP_400_BAD_REQUEST)
 
 
 class QuotationClientDetailView(APIView):
@@ -56,3 +57,19 @@ def delete_log(request, _id):
         qc.save()
         return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def ClientNotDuplicatedInQuotation(request , _id):
+    quotation = Quotation.objects.filter(id=_id)
+    qc = QuotationClient.objects.exclude(quotation__in = list(quotation))
+    list_id_client = []
+    response = []
+    for quotationclient in qc :
+        list_id_client.append(quotationclient.client.id)
+
+    clients = Client.objects.exclude(id__in=list_id_client).filter(state=1)
+    for client in clients:
+        serializer = ClientSerializer(client, context={'request' : request})
+        response.append(serializer.data)
+
+    return Response({'clients' : response}, status=status.HTTP_200_OK)

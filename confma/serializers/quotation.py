@@ -20,7 +20,7 @@ class QuotationSerializer(serializers.ModelSerializer):
         fields = ['url', 'id', 'value_cloth',
                   'value_work', 'value_threads', 'value_buttons',
                   'value_necks', 'value_embroidery', 'value_prints',
-                  'cloth','clothId']
+                  'cloth','clothId','total']
         extra_kwargs = {
             "value_cloth": {
                 "error_messages":
