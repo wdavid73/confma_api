@@ -4,8 +4,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ..models import Quotation, Cloth
-from ..serializers.quotation import QuotationSerializer,ClothSerializer
+from .client import lenClient
+from ..models import Quotation, Cloth, QuotationClient
+from ..serializers.quotation import QuotationSerializer, ClothSerializer
 
 
 class QuotationView(APIView):
@@ -17,17 +18,16 @@ class QuotationView(APIView):
     def post(self, request):
         if not ClothDuplicated(request.data['clothId']):
             total = getTotal(
-                request.data['value_work'], request.data['value_cloth'],request.data['value_buttons'],
-                request.data['value_threads'],request.data['value_necks'],
-                request.data['value_embroidery'],request.data['value_prints'])
+                request.data['value_work'], request.data['value_cloth'], request.data['value_buttons'],
+                request.data['value_threads'], request.data['value_necks'],
+                request.data['value_embroidery'], request.data['value_prints'])
             request.data['total'] = str(total)
             serializer = QuotationSerializer(data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors , status=status.HTTP_400_BAD_REQUEST)
-        return Response({'error' : 'Esta prenda ya ah sido cotizada'} , status = status.HTTP_406_NOT_ACCEPTABLE)
-        
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error': 'Esta prenda ya ah sido cotizada'}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
 class QuotationDetailView(APIView):
@@ -79,24 +79,21 @@ def FindClothByName(cloth_name, request):
     cloth = Cloth.objects.filter(name=cloth_name, id__in=list(ClothWithOutQuotation().values_list('id', flat=True)))
     return cloth
 
+
 @api_view(['GET'])
 def ClothWithOutQuotation(request):
     quotations = Quotation.objects.filter(state=1).values_list('cloth', flat=True)
     cloth_quotation = Cloth.objects.exclude(id__in=quotations)
-    response = []
-    for c in cloth_quotation:
-        serializer = ClothSerializer(c , context={'request' : request})
-        response.append(serializer.data)
-    return Response({'response' : response} , status=status.HTTP_200_OK)
-    
+    response = [ClothSerializer(c, context={'request': request}).data for c in cloth_quotation]
+    return Response({'response': response}, status=status.HTTP_200_OK)
 
 
 def ClothDuplicated(req):
     cloth = Cloth.objects.filter(id=req)
-    if len(Quotation.objects.filter(cloth__in = list(cloth))) > 0:
+    if len(Quotation.objects.filter(cloth__in=list(cloth))) > 0:
         return True
     return False
 
-def getTotal(vw,vc,vb,vt,vn,ve,vp):
+
+def getTotal(vw, vc, vb, vt, vn, ve, vp):
     return int(vw) + int(vc) + int(vb) + int(vt) + int(vn) + int(ve) + int(vp)
-    

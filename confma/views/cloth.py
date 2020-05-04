@@ -90,18 +90,15 @@ def DetailsCloth(request, _id):
 def getClothQuotation(cloth, request):
     from ..models import Quotation
     from ..serializers.quotation import QuotationSerializer
-    response = list()
-    for q in Quotation.objects.all().filter(state=1, cloth=cloth):
-        serializer = QuotationSerializer(q, context={'request': request})
-        response.append(serializer.data)
+    response = [QuotationSerializer(q, context={
+        'request': request}).data for q in Quotation.objects.all().filter(state=1, cloth=cloth)]
     return response
 
 
 def getClothRental(cloth, request):
     from ..models import Rental
     from ..serializers.rental import RentalSerializer
-    response = list()
-    for rental in Rental.objects.all().filter(state=1, cloth=cloth):
-        serializer = RentalSerializer(rental, context={'request': request})
-        response.append(serializer.data)
+    response = [
+        RentalSerializer(rental, context={'request': request}).data for rental in
+        Rental.objects.all().filter(state=1, cloth=cloth)]
     return response

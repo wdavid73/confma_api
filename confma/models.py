@@ -23,25 +23,25 @@ class Client(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "{} {} , {}".format(self.name, self.last_name, self.cellphone)
+        return "id: {}, {} {} , {}".format(self.id, self.name, self.last_name, self.cellphone)
 
     def get_absolute_url(self):
         return reverse("confma:client_detail", kwargs={'_id': self.id})
 
     class Meta:
-        db_table="Client"
+        db_table = "Client"
 
 
 class Cloth(models.Model):
-    name=models.CharField(max_length=100, null=False)
-    color=models.CharField(max_length=100, null=False)
-    size=models.CharField(max_length=10, null=False,
-                          blank=False, choices=list_size, default=1)
-    fashion=models.CharField(max_length=50, null=False)
-    image=models.ImageField(upload_to='fashion/%Y/%m/%d/')
-    state=models.SmallIntegerField(default=1, null=False)
-    created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now=True)
+    name = models.CharField(max_length=100, null=False)
+    color = models.CharField(max_length=100, null=False)
+    size = models.CharField(max_length=10, null=False,
+                            blank=False, choices=list_size, default=1)
+    fashion = models.CharField(max_length=50, null=False)
+    image = models.ImageField(upload_to='fashion/%Y/%m/%d/')
+    state = models.SmallIntegerField(default=1, null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "{} Talla : {}, Color : {}, Moda : {}".format(self.name, self.size, self.color, self.fashion)
@@ -50,48 +50,49 @@ class Cloth(models.Model):
         return reverse("confma:cloth_detail", kwargs={'_id': self.id})
 
     class Meta:
-        db_table="Cloth"
+        db_table = "Cloth"
 
 
 class Quotation(models.Model):
-    value_cloth=models.DecimalField(
+    value_cloth = models.DecimalField(
         max_digits=9, decimal_places=2, null=False, blank=False)
-    value_work=models.DecimalField(
+    value_work = models.DecimalField(
         max_digits=9, decimal_places=2, null=False, blank=False)
-    value_threads=models.DecimalField(
+    value_threads = models.DecimalField(
         max_digits=8, decimal_places=2, null=False, blank=False)
-    value_buttons=models.DecimalField(
+    value_buttons = models.DecimalField(
         max_digits=8, decimal_places=2, null=False, blank=False)
-    value_necks=models.DecimalField(
+    value_necks = models.DecimalField(
         max_digits=8, decimal_places=2, null=True, blank=False, default=0)
-    value_embroidery=models.DecimalField(
+    value_embroidery = models.DecimalField(
         max_digits=8, decimal_places=2, null=True, blank=False, default=0)
-    value_prints=models.DecimalField(
+    value_prints = models.DecimalField(
         max_digits=8, decimal_places=2, null=True, blank=False, default=0)
-    total=models.DecimalField(max_digits=9,decimal_places=2,null=True, blank=True , default=0)
-    cloth=models.ForeignKey(
+    total = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank=True, default=0)
+    cloth = models.ForeignKey(
         Cloth, on_delete=models.CASCADE, blank=False, null=False)
-    client=models.ManyToManyField(Client, through="QuotationClient")
-    state=models.SmallIntegerField(default=1, null=False)
-    created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now=True)
+    client = models.ManyToManyField(Client, through="QuotationClient")
+    state = models.SmallIntegerField(default=1, null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Value Cloth : {}, Value Work : {}, Value Threads : {}, Value Buttons : {}, Cloth : {}".format(self.value_cloth, self.value_work, self.value_threads, self.value_buttons, self.cloth)
+        return "Value Cloth : {}, Value Work : {}, Value Threads : {}, Value Buttons : {}, Cloth : {}".format(
+            self.value_cloth, self.value_work, self.value_threads, self.value_buttons, self.cloth)
 
     def get_absolute_url(self):
         return reverse("confma:quotation_detail", kwargs={'_id': self.id})
 
     class Meta:
-        db_table="Quotation"
+        db_table = "Quotation"
 
 
 class QuotationClient(models.Model):
-    quotation=models.ForeignKey(Quotation, on_delete=models.CASCADE)
-    client=models.ForeignKey(Client, on_delete=models.CASCADE, blank=False, null=False)
-    state=models.SmallIntegerField(default=1, null=False)
-    created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now=True)
+    quotation = models.ForeignKey(Quotation, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, blank=False, null=False)
+    state = models.SmallIntegerField(default=1, null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "Quotation : {} , Client : {}".format(self.quotation, self.client)
@@ -100,22 +101,22 @@ class QuotationClient(models.Model):
         return reverse("confma:quotation_client_detail", kwargs={'_id': self.id})
 
     class Meta:
-        db_table="Quotation_Client"
+        db_table = "Quotation_Client"
 
 
 class Rental(models.Model):
-    date_now: DateField=models.DateField(auto_now_add=True)  # [YYYY-MM-DD]
-    date_return=models.DateField()  # [YYYY-MM-DD]
-    price=models.DecimalField(
+    date_now: DateField = models.DateField(auto_now_add=True)  # [YYYY-MM-DD]
+    date_return = models.DateField()  # [YYYY-MM-DD]
+    price = models.DecimalField(
         max_digits=10, decimal_places=2, null=False, default=5000.00)
-    cloth=models.ForeignKey(
+    cloth = models.ForeignKey(
         Cloth, on_delete=models.CASCADE, blank=False, null=False)
-    client=models.ForeignKey(
+    client = models.ForeignKey(
         Client, on_delete=models.CASCADE, blank=False, null=False)
-    ifrental=models.SmallIntegerField(default=1, null=False, blank=False)
-    state=models.SmallIntegerField(default=1, null=False)
-    created_at=models.DateTimeField(auto_now_add=True)
-    updated_at=models.DateTimeField(auto_now=True)
+    ifrental = models.SmallIntegerField(default=1, null=False, blank=False)
+    state = models.SmallIntegerField(default=1, null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "Date Now :{} , Date Return : {} , Price : {} , Client : {} , Cloth : {}" \
@@ -125,4 +126,4 @@ class Rental(models.Model):
         return reverse("confma:rental_detail", kwargs={'_id': self.id})
 
     class Meta:
-        db_table="Rental"
+        db_table = "Rental"

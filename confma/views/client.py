@@ -17,10 +17,7 @@ class ClientViews(APIView):
             clients, many=True, context={'request': request})
         return Response({"clients": serializer.data})
 
-    def post(self, request):       
-        #### Sobreescribiendo Campos #####
-            #request.data['name'] = 'Sowil'
-        #########
+    def post(self, request):
         serializer = ClientSerializer(
             data=request.data, context={'request': request})
         if serializer.is_valid():
@@ -77,18 +74,17 @@ def FindClient(request, _id):
 def getRentalClient(client, request):
     from ..models import Rental
     from ..serializers.rental import RentalSerializer
-    response = list()
-    for rental in Rental.objects.all().filter(state=1, client=client):
-        serializer = RentalSerializer(rental, context={'request': request})
-        response.append(serializer.data)
+    response = [RentalSerializer(rental, context={'request': request}).data for rental in
+                Rental.objects.all().filter(state=1, client=client)]
     return response
 
 
 def getQuotationClient(client, request):
     quotation_client = QuotationClient.objects.filter(state=1, client=client)
-    response = []
-    for qc in quotation_client:
-        serializer = QuotationClientSerializer(
-            qc, context={'request': request})
-        response.append(serializer.data)
+    response = [QuotationClientSerializer(qc, context={'request': request}).data for qc in quotation_client]
     return response
+
+
+def lenClient():
+    client = list(Client.objects.filter(state=1))
+    return len(client)

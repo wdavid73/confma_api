@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ..models import QuotationClient , Quotation , Client
+from ..models import QuotationClient, Quotation, Client
 from ..serializers.quotation_client import QuotationClientSerializer, ClientSerializer
 
 
@@ -18,14 +18,14 @@ class QuotationClientView(APIView):
     def get(self, request):
         qc = QuotationClient.objects.filter(state=1)
         serializer = QuotationClientSerializer(qc, many=True, context={'request': request})
-        return Response({'Quotation Client': serializer.data})
+        return Response({'Quotation_Client': serializer.data})
 
     def post(self, request):
         serializer = QuotationClientSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors , status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class QuotationClientDetailView(APIView):
@@ -58,18 +58,12 @@ def delete_log(request, _id):
         return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['GET'])
-def ClientNotDuplicatedInQuotation(request , _id):
+def ClientNotDuplicatedInQuotation(request, _id):
     quotation = Quotation.objects.filter(id=_id)
-    qc = QuotationClient.objects.exclude(quotation__in = list(quotation))
-    list_id_client = []
-    response = []
-    for quotationclient in qc :
-        list_id_client.append(quotationclient.client.id)
-
-    clients = Client.objects.exclude(id__in=list_id_client).filter(state=1)
-    for client in clients:
-        serializer = ClientSerializer(client, context={'request' : request})
-        response.append(serializer.data)
-
-    return Response({'clients' : response}, status=status.HTTP_200_OK)
+    quotation_client = QuotationClient.objects.filter(quotation__in=list(quotation))
+    list_client = [qc.client.id for qc in quotation_client]
+    query_client = Client.objects.exclude(id__in=list_client).filter(state=1)
+    response = [ClientSerializer(client, context={'request': request}).data for client in query_client]
+    return Response({'clients': response}, status=status.HTTP_200_OK)

@@ -1,11 +1,9 @@
-from typing import Dict, Any
 from rest_framework import serializers
-from .links import client_link
+
 from ..models import Client
 
 
 class ClientSerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = Client
         fields = ['id', 'name', 'last_name', 'address', 'phone', 'cellphone']

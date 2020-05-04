@@ -1,9 +1,8 @@
 from rest_framework import serializers
 
-from .client import ClientSerializer
 from .cloth import ClothSerializer
 from .links import quotation_link
-from ..models import Quotation, Client , Cloth
+from ..models import Quotation, Cloth
 
 
 class QuotationSerializer(serializers.ModelSerializer):
@@ -20,7 +19,7 @@ class QuotationSerializer(serializers.ModelSerializer):
         fields = ['url', 'id', 'value_cloth',
                   'value_work', 'value_threads', 'value_buttons',
                   'value_necks', 'value_embroidery', 'value_prints',
-                  'cloth','clothId','total']
+                  'cloth', 'clothId', 'total']
         extra_kwargs = {
             "value_cloth": {
                 "error_messages":

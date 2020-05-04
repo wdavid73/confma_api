@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .client import ClientSerializer
 from .links import quotation_client_link
 from .quotation import QuotationSerializer
-from ..models import QuotationClient,Client,Quotation
+from ..models import QuotationClient, Client, Quotation
 
 
 class QuotationClientSerializer(serializers.ModelSerializer):
@@ -11,19 +11,19 @@ class QuotationClientSerializer(serializers.ModelSerializer):
     client = ClientSerializer(read_only=True, many=False)
     clientId = serializers.PrimaryKeyRelatedField(
         write_only=True,
-        queryset = Client.objects.filter(state=1),
+        queryset=Client.objects.filter(state=1),
         source='client'
     )
     quotation = QuotationSerializer(read_only=True, many=False)
     quotationId = serializers.PrimaryKeyRelatedField(
         write_only=True,
-        queryset = Quotation.objects.filter(state=1),
+        queryset=Quotation.objects.filter(state=1),
         source="quotation"
     )
 
     class Meta:
         model = QuotationClient
-        fields = ['url', 'id', 'quotation', 'quotationId','client','clientId']
+        fields = ['url', 'id', 'quotation', 'quotationId', 'client', 'clientId']
         extra_kwargs = {
             "quotation": {
                 "error_messages":

@@ -2,8 +2,7 @@ from rest_framework import serializers
 
 from .client import ClientSerializer
 from .cloth import ClothSerializer
-from .links import rental_link
-from ..models import Rental , Client , Cloth
+from ..models import Rental, Client, Cloth
 
 
 class RentalSerializer(serializers.ModelSerializer):
@@ -23,7 +22,7 @@ class RentalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rental
         fields = ['id', 'date_return', 'price', 'ifrental',
-                  'cloth', 'clothId','client', 'clientId', ]
+                  'cloth', 'clothId', 'client', 'clientId', ]
         extra_kwargs = {
             "price": {
                 "error_messages":
