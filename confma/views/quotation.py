@@ -12,7 +12,8 @@ from ..serializers.quotation import QuotationSerializer, ClothSerializer
 class QuotationView(APIView):
     def get(self, request):
         quotation = Quotation.objects.filter(state=1)
-        serializer = QuotationSerializer(quotation, many=True, context={'request': request})
+        serializer = QuotationSerializer(
+            quotation, many=True, context={'request': request})
         return Response({"quotations": serializer.data})
 
     def post(self, request):
@@ -22,7 +23,8 @@ class QuotationView(APIView):
                 request.data['value_threads'], request.data['value_necks'],
                 request.data['value_embroidery'], request.data['value_prints'])
             request.data['total'] = str(total)
-            serializer = QuotationSerializer(data=request.data, context={'request': request})
+            serializer = QuotationSerializer(
+                data=request.data, context={'request': request})
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -34,12 +36,14 @@ class QuotationDetailView(APIView):
 
     def get(self, request, id):
         quotation = get_object_or_404(Quotation, id=id)
-        serializer = QuotationSerializer(quotation, context={'request': request})
+        serializer = QuotationSerializer(
+            quotation, context={'request': request})
         return Response(serializer.data)
 
     def put(self, request, id):
         quotation = get_object_or_404(Quotation, id=id)
-        serializer = QuotationSerializer(quotation, data=request.data, context={'request': request})
+        serializer = QuotationSerializer(
+            quotation, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -76,15 +80,18 @@ def FindQuotations(request, cloth_name):
 
 
 def FindClothByName(cloth_name, request):
-    cloth = Cloth.objects.filter(name=cloth_name, id__in=list(ClothWithOutQuotation().values_list('id', flat=True)))
+    cloth = Cloth.objects.filter(name=cloth_name, id__in=list(
+        ClothWithOutQuotation().values_list('id', flat=True)))
     return cloth
 
 
 @api_view(['GET'])
 def ClothWithOutQuotation(request):
-    quotations = Quotation.objects.filter(state=1).values_list('cloth', flat=True)
+    quotations = Quotation.objects.filter(
+        state=1).values_list('cloth', flat=True)
     cloth_quotation = Cloth.objects.exclude(id__in=quotations)
-    response = [ClothSerializer(c, context={'request': request}).data for c in cloth_quotation]
+    response = [ClothSerializer(
+        c, context={'request': request}).data for c in cloth_quotation]
     return Response({'response': response}, status=status.HTTP_200_OK)
 
 
@@ -93,6 +100,15 @@ def ClothDuplicated(req):
     if len(Quotation.objects.filter(cloth__in=list(cloth))) > 0:
         return True
     return False
+
+
+@api_view(['GET'])
+def isValidCloth(req, id):
+    cloth = Cloth.objects.get(id=id)
+    if Quotation.objects.filter(cloth = cloth).exists():
+        return Response({"valid": False})
+    else:
+        return Response({"valid": True})
 
 
 def getTotal(vw, vc, vb, vt, vn, ve, vp):

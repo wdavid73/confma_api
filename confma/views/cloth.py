@@ -9,7 +9,6 @@ from rest_framework.views import APIView
 from ..models import Cloth
 from ..serializers.cloth import ClothSerializer
 
-
 class ClothView(APIView):
     parser_class = (FileUploadParser,)
 
@@ -20,6 +19,7 @@ class ClothView(APIView):
         return Response({"cloths": serializer.data})
 
     def post(self, request):
+        print(request.data['image'])
         serializer = ClothSerializer(
             data=request.data, context={'request': request})
         if serializer.is_valid():

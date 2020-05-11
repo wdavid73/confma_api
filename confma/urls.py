@@ -32,6 +32,7 @@ urlpatterns = [
     path('quotations/delete/<int:_id>/', quotation.delete_log, name='quotation_delete'),
     path('quotations/find/<str:cloth_name>/', quotation.FindQuotations, name='quotation_find'),
     path('quotations_cloth/', quotation.ClothWithOutQuotation, name='clothwithoutquotation'),
+    path('isvalidcloth/<int:id>/' , quotation.isValidCloth , name="isvalidCloth"),
 
     path('quotations_clients/', QuotationClientView.as_view(), name="quotation_client"),
     path('quotations_clients/<id>/', QuotationClientDetailView.as_view(), name="quotation_client_detail"),
@@ -40,4 +41,5 @@ urlpatterns = [
          name='qc_client_not_duplicated'),
 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    
 ]
