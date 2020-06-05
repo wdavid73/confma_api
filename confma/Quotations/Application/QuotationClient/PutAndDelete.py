@@ -3,9 +3,9 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from ...Domain.ModelQuotation import QuotationClient
 from ...Infrastructure.SerializerQuotationClient import \
     QuotationClientSerializer
-from ...Domain.ModelQuotation import QuotationClient
 
 
 class PutAndDeleteQuotationClient(APIView):

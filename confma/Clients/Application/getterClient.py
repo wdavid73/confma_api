@@ -1,10 +1,13 @@
-from confma_api.confma.Quotations.Domain.ModelQuotation import Client, QuotationClient, Rental
-from confma_api.confma.serializers.quotation_client import \
-    QuotationClientSerializer
-from confma_api.confma.Rentals.Infrastructure.SerializerRental import RentalSerializer
+from typing import List
+
+from ..Domain.ModelClient import Client
+from ...Quotations.Domain.ModelQuotation import QuotationClient
+from ...Rentals.Domain.ModelRental import Rental
+from ...Rentals.Infrastructure.SerializerRental import RentalSerializer
+from ...serializers.quotation_client import QuotationClientSerializer
 
 
-def getRentalClient(client, request):
+def getRentalClient(client: Client, request: Request) -> List:
     response = [
         RentalSerializer(rental, context={'request': request}).data for
         rental in
@@ -12,7 +15,7 @@ def getRentalClient(client, request):
     return response
 
 
-def getQuotationClient(client, request):
+def getQuotationClient(client: Client, request: Request) -> List:
     quotation_client = QuotationClient.objects.filter(state=1,
                                                       client=client)
     response = [
@@ -21,6 +24,6 @@ def getQuotationClient(client, request):
     return response
 
 
-def lenClient():
+def lenClient() -> int:
     client = list(Client.objects.filter(state=1))
     return len(client)

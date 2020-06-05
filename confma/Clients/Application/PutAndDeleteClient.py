@@ -1,10 +1,11 @@
 from django.http import Http404
 from rest_framework import status
+from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ..Infrastructure.SerializerClient import ClientSerializer
 from ..Domain.ModelClient import Client
+from ..Infrastructure.SerializerClient import ClientSerializer
 
 
 class PutAndDeleteClient(APIView):
@@ -14,7 +15,7 @@ class PutAndDeleteClient(APIView):
         except Client.DoesNotExist:
             raise Http404
 
-    def put(self, request, id):
+    def put(self, request: Request, id: int) -> Response:
         client = self.get_object(id)
         serializer = ClientSerializer(
             client, data=request.data, context={'request': request})
@@ -24,7 +25,7 @@ class PutAndDeleteClient(APIView):
         return Response(serializer.errors,
                         status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, id):
+    def delete(self, request: Request, id: int) -> Response:
         client = self.get_object(id=id)
         client.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

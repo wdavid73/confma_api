@@ -1,8 +1,9 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from ....Clients.Infrastructure.SerializerClient import ClientSerializer
-from ....Clients.Domain.ModelClient import Client
+
 from ...Domain.ModelQuotation import Quotation, QuotationClient
+from ....Clients.Domain.ModelClient import Client
+from ....Clients.Infrastructure.SerializerClient import ClientSerializer
 
 
 @api_view(['GET'])

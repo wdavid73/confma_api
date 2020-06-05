@@ -14,10 +14,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Client',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id',
+                 models.AutoField(auto_created=True, primary_key=True,
+                                  serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('last_name', models.CharField(max_length=200)),
-                ('address', models.CharField(max_length=100, null=True)),
+                (
+                'address', models.CharField(max_length=100, null=True)),
                 ('phone', models.IntegerField(null=True)),
                 ('cellphone', models.BigIntegerField()),
                 ('state', models.SmallIntegerField(default=1)),
@@ -31,14 +34,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Cloth',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id',
+                 models.AutoField(auto_created=True, primary_key=True,
+                                  serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
                 ('color', models.CharField(max_length=100)),
                 ('size', models.CharField(
-                    choices=[('XS', 'XS'), ('S', 'S'), ('M', 'M'), ('L', 'L'), ('XL', 'XL'), ('XXL', 'XXL')], default=1,
+                    choices=[('XS', 'XS'), ('S', 'S'), ('M', 'M'),
+                             ('L', 'L'), ('XL', 'XL'), ('XXL', 'XXL')],
+                    default=1,
                     max_length=10)),
                 ('fashion', models.CharField(max_length=50)),
-                ('image', models.ImageField(upload_to='fashion/%Y/%m/%d/')),
+                ('image',
+                 models.ImageField(upload_to='fashion/%Y/%m/%d/')),
                 ('state', models.SmallIntegerField(default=1)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
@@ -50,14 +58,26 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Quotation',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('value_cloth', models.DecimalField(decimal_places=2, max_digits=9)),
-                ('value_work', models.DecimalField(decimal_places=2, max_digits=9)),
-                ('value_threads', models.DecimalField(decimal_places=2, max_digits=8)),
-                ('value_buttons', models.DecimalField(decimal_places=2, max_digits=8)),
-                ('value_necks', models.DecimalField(decimal_places=2, max_digits=8, null=True)),
-                ('value_embroidery', models.DecimalField(decimal_places=2, max_digits=8, null=True)),
-                ('value_prints', models.DecimalField(decimal_places=2, max_digits=8, null=True)),
+                ('id',
+                 models.AutoField(auto_created=True, primary_key=True,
+                                  serialize=False, verbose_name='ID')),
+                ('value_cloth',
+                 models.DecimalField(decimal_places=2, max_digits=9)),
+                ('value_work',
+                 models.DecimalField(decimal_places=2, max_digits=9)),
+                ('value_threads',
+                 models.DecimalField(decimal_places=2, max_digits=8)),
+                ('value_buttons',
+                 models.DecimalField(decimal_places=2, max_digits=8)),
+                ('value_necks',
+                 models.DecimalField(decimal_places=2, max_digits=8,
+                                     null=True)),
+                ('value_embroidery',
+                 models.DecimalField(decimal_places=2, max_digits=8,
+                                     null=True)),
+                ('value_prints',
+                 models.DecimalField(decimal_places=2, max_digits=8,
+                                     null=True)),
                 ('state', models.SmallIntegerField(default=1)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
@@ -69,16 +89,24 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Rental',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id',
+                 models.AutoField(auto_created=True, primary_key=True,
+                                  serialize=False, verbose_name='ID')),
                 ('date_now', models.DateField(auto_now_add=True)),
                 ('date_return', models.DateField()),
-                ('price', models.DecimalField(decimal_places=2, default=5000.0, max_digits=10)),
+                ('price',
+                 models.DecimalField(decimal_places=2, default=5000.0,
+                                     max_digits=10)),
                 ('ifrental', models.SmallIntegerField(default=1)),
                 ('state', models.SmallIntegerField(default=1)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('client', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='confma.Client')),
-                ('cloth', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='confma.Cloth')),
+                ('client', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    to='confma.Client')),
+                ('cloth', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    to='confma.Cloth')),
             ],
             options={
                 'db_table': 'Rental',
@@ -87,13 +115,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='QuotationClient',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id',
+                 models.AutoField(auto_created=True, primary_key=True,
+                                  serialize=False, verbose_name='ID')),
                 ('total', models.BigIntegerField()),
                 ('state', models.SmallIntegerField(default=1)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('client', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='confma.Client')),
-                ('quotation', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='confma.Quotation')),
+                ('client', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    to='confma.Client')),
+                ('quotation', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    to='confma.Quotation')),
             ],
             options={
                 'db_table': 'Quotation_Client',
@@ -102,11 +136,14 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='quotation',
             name='client',
-            field=models.ManyToManyField(through='confma.QuotationClient', to='confma.Client'),
+            field=models.ManyToManyField(
+                through='confma.QuotationClient', to='confma.Client'),
         ),
         migrations.AddField(
             model_name='quotation',
             name='cloth',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='confma.Cloth'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='confma.Cloth'),
         ),
     ]

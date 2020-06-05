@@ -10,8 +10,6 @@ urlpatterns = [
     path('quotations-clients/', include('confma.Quotations.Domain'
                                         '.QuotationClient.urls')),
 
-
-
     path('api-auth/',
          include('rest_framework.urls', namespace='rest_framework'))
 

@@ -2,9 +2,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from ...Domain.ModelQuotation import QuotationClient
 from ...Infrastructure.SerializerQuotationClient import \
     QuotationClientSerializer
-from ...Domain.ModelQuotation import QuotationClient
 
 
 class GetAndPostQuotationClient(APIView):

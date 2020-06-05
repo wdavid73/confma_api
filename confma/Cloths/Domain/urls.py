@@ -1,8 +1,8 @@
 from django.urls import path
 
+from ..Application.DeleteCloth import delete_log
 from ..Application.GetAndPostCloth import GetAndPostCloth
 from ..Application.PutAndDeleteCloth import PutAndDeleteCloth
-from ..Application.DeleteCloth import delete_log
 
 urlpatterns = [
     path('', GetAndPostCloth.as_view(), name="cloth"),

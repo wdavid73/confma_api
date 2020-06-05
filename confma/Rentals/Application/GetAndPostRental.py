@@ -1,5 +1,7 @@
 from datetime import datetime
+
 from rest_framework import status
+from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -8,13 +10,13 @@ from ..Infrastructure.SerializerRental import RentalSerializer
 
 
 class GetAndPostRental(APIView):
-    def get(self, request):
+    def get(self, request: Request) -> Response:
         rentals = Rental.objects.filter(state=1, ifrental=1)
         serializer = RentalSerializer(rentals, many=True,
                                       context={'request': request})
         return Response({'rentals': serializer.data})
 
-    def post(self, request):
+    def post(self, request: Request) -> Response:
         now = datetime.today()
         date_object = datetime.strptime(request.data["date_return"],
                                         '%Y-%m-%d')

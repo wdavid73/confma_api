@@ -1,21 +1,22 @@
 from rest_framework import status
+from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from ..Domain.ModelQuotation import Quotation
-from ...Cloths.Domain.ModelCloth import Cloth
 from ..Infrastructure.SerializerQuotation import QuotationSerializer
+from ...Cloths.Domain.ModelCloth import Cloth
 
 
 class GetAndPost(APIView):
 
-    def get(self, request):
+    def get(self, request: Request) -> Response:
         quotation = Quotation.objects.filter(state=1)
         serializer = QuotationSerializer(
             quotation, many=True, context={'request': request})
         return Response({"quotations": serializer.data})
 
-    def post(self, request):
+    def post(self, request: Request) -> Response:
         if not ClothDuplicated(request.data['clothId']):
             total = getTotal(
                 request.data['value_work'], request.data['value_cloth'],
@@ -44,6 +45,7 @@ def ClothDuplicated(req):
     return False
 
 
-def getTotal(vw, vc, vb, vt, vn, ve, vp):
+def getTotal(vw: int, vc: int, vb: int, vt: int,
+             vn: int, ve: int, vp: int) -> int:
     return int(vw) + int(vc) + int(vb) + int(vt) + int(vn) + int(
         ve) + int(vp)

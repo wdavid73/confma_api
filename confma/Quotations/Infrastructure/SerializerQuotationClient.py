@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
-from ...Clients.Infrastructure.SerializerClient import ClientSerializer
-from ..Infrastructure.SerializerQuotation import QuotationSerializer
 from ..Domain.ModelQuotation import QuotationClient, Client, Quotation
+from ..Infrastructure.SerializerQuotation import QuotationSerializer
+from ...Clients.Infrastructure.SerializerClient import ClientSerializer
 
 
 class QuotationClientSerializer(serializers.ModelSerializer):
@@ -21,7 +21,8 @@ class QuotationClientSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = QuotationClient
-        fields = ['id', 'quotation', 'quotationId', 'client', 'clientId']
+        fields = ['id', 'quotation', 'quotationId', 'client',
+                  'clientId']
         extra_kwargs = {
             "quotation": {
                 "error_messages":

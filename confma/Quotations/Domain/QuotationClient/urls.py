@@ -1,12 +1,12 @@
 from django.urls import path
 
+from ...Application.QuotationClient.ClientNotDuplicated import \
+    ClientNotDuplicatedInQuotation
+from ...Application.QuotationClient.Delete import delete_log
 from ...Application.QuotationClient.GetAndPost import \
     GetAndPostQuotationClient
 from ...Application.QuotationClient.PutAndDelete import \
     PutAndDeleteQuotationClient
-from ...Application.QuotationClient.Delete import delete_log
-from ...Application.QuotationClient.ClientNotDuplicated import \
-    ClientNotDuplicatedInQuotation
 
 urlpatterns = [
     path('quotations_clients/', GetAndPostQuotationClient.as_view(),

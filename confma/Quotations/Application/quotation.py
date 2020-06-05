@@ -1,5 +1,7 @@
 from rest_framework.decorators import api_view
+from rest_framework.request import Request
 from rest_framework.response import Response
+
 from ..Domain.ModelQuotation import Quotation
 from ...Cloths.Domain.ModelCloth import Cloth
 
@@ -12,7 +14,7 @@ def ClothDuplicated(req):
 
 
 @api_view(['GET'])
-def isValidCloth(req, id):
+def isValidCloth(request: Request, id: int) -> Response:
     cloth = Cloth.objects.get(id=id)
     if Quotation.objects.filter(cloth=cloth).exists():
         return Response({"valid": False})

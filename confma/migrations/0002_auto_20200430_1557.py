@@ -16,21 +16,25 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='quotation',
             name='total',
-            field=models.BigIntegerField(blank=True, default=0, null=True),
+            field=models.BigIntegerField(blank=True, default=0,
+                                         null=True),
         ),
         migrations.AlterField(
             model_name='quotation',
             name='value_embroidery',
-            field=models.DecimalField(decimal_places=2, default=0, max_digits=8, null=True),
+            field=models.DecimalField(decimal_places=2, default=0,
+                                      max_digits=8, null=True),
         ),
         migrations.AlterField(
             model_name='quotation',
             name='value_necks',
-            field=models.DecimalField(decimal_places=2, default=0, max_digits=8, null=True),
+            field=models.DecimalField(decimal_places=2, default=0,
+                                      max_digits=8, null=True),
         ),
         migrations.AlterField(
             model_name='quotation',
             name='value_prints',
-            field=models.DecimalField(decimal_places=2, default=0, max_digits=8, null=True),
+            field=models.DecimalField(decimal_places=2, default=0,
+                                      max_digits=8, null=True),
         ),
     ]

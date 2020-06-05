@@ -6,7 +6,8 @@ from ..Domain.ModelClient import Client
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
-        fields = ['id', 'name', 'last_name', 'address', 'phone', 'cellphone']
+        fields = ['id', 'name', 'last_name', 'address', 'phone',
+                  'cellphone']
         extra_kwargs = {
             "name": {
                 "error_messages":

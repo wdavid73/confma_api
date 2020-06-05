@@ -1,9 +1,9 @@
 from django.urls import path
 
+from ..Application.ClothWithOutQuotation import ClothWithOutQuotation
+from ..Application.DeleteQuotation import delete_log
 from ..Application.GetAndPostQuotation import GetAndPost
 from ..Application.PutAntDelete import PutAndDelete
-from ..Application.Delete import delete_log
-from ..Application.ClothWithOutQuotation import ClothWithOutQuotation
 from ..Application.quotation import isValidCloth
 
 urlpatterns = [

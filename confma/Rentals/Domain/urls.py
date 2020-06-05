@@ -1,8 +1,8 @@
 from django.urls import path
 
+from ..Application.DeleteRental import delete_log
 from ..Application.GetAndPostRental import GetAndPostRental
 from ..Application.PutAndDeleteRental import PutAndDeleteRental
-from ..Application.DeleteRental import delete_log
 from ..Application.RefundRental import RefundRental
 from ..Application.rental import ClothWithOutRental
 
