@@ -1,0 +1,1 @@
+web: gunicorn confecciones_maribel_api.wsgi --log-file -

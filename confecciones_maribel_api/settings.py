@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'confecciones_maribel_api.urls'
@@ -77,15 +78,23 @@ WSGI_APPLICATION = 'confecciones_maribel_api.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'ltxdnswb',
+#        'USER': 'ltxdnswb',
+#        'PASSWORD': 'AATDt-j_FHYCZbQpbC4HADrebKPZ50cv',
+#        'HOST': 'drona.db.elephantsql.com',
+#        'PORT': 5432
+#    }
+#}
+
+import dj_database_url
+from decouple import config
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ltxdnswb',
-        'USER': 'ltxdnswb',
-        'PASSWORD': 'AATDt-j_FHYCZbQpbC4HADrebKPZ50cv',
-        'HOST': 'drona.db.elephantsql.com',
-        'PORT': 5432
-    }
+    'default' : dj_database_url.config(
+        default=config("DATABASE_URL")
+    )
 }
 
 # Password validation
@@ -129,11 +138,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 REST_FRAMEWORK = {
     # para produccion
-    # 'DEFAULT_RENDERER_CLASSES': (
-    #     'rest_framework.renderers.JSONRenderer',
-    # ),
+    'DEFAULT_RENDERER_CLASSES': (
+         'rest_framework.renderers.JSONRenderer',
+    ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 5
 }
