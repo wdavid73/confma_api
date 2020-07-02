@@ -9,7 +9,7 @@ from ..Infrastructure.SerializerClient import ClientSerializer
 
 
 class PutAndDeleteClient(APIView):
-    def get_object(id):
+    def get_object(self, id):
         try:
             return Client.objects.get(id=id)
         except Client.DoesNotExist:
@@ -26,6 +26,6 @@ class PutAndDeleteClient(APIView):
                         status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request: Request, id: int) -> Response:
-        client = self.get_object(id=id)
+        client = self.get_object(id)
         client.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

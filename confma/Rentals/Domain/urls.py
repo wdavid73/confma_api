@@ -8,12 +8,9 @@ from ..Application.rental import ClothWithOutRental
 
 urlpatterns = [
     path('', GetAndPostRental.as_view(), name="rental"),
-    path('<id>/', PutAndDeleteRental.as_view(),
-         name="rental_detail"),
-    path('delete/<int:_id>/', delete_log,
-         name='rental_delete'),
-    path('refund/<int:_id>/', RefundRental,
-         name='rental_refund'),
-    path('rentals_cloth/', ClothWithOutRental,
-         name="cloth_without_rental"),
+    path('cloths/', ClothWithOutRental, name="cloth_without_rental"),
+    path('<id>/', PutAndDeleteRental.as_view(), name="rental_detail"),
+    path('delete/<int:_id>/', delete_log, name='rental_delete'),
+    path('refund/<int:_id>/', RefundRental, name='rental_refund'),
+
 ]

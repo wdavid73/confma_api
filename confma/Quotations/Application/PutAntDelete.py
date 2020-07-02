@@ -8,10 +8,10 @@ from ..Infrastructure.SerializerQuotation import QuotationSerializer
 
 
 class PutAndDelete(APIView):
-    def get_object(id):
+    def get_object(self,id):
         try:
             return Quotation.objects.get(id=id)
-        except Client.DoesNotExist:
+        except Quotation.DoesNotExist:
             raise Http404
 
     def put(self, request, id):
@@ -21,7 +21,7 @@ class PutAndDelete(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response(serializer.errors,
+        return Response({"errors": serializer.errors},
                         status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id):

@@ -8,6 +8,7 @@ from ...Cloths.Domain.ModelCloth import Cloth
 from ...Cloths.Infrastruture.SerializerCloth import ClothSerializer
 
 
+
 @api_view(['GET'])
 def ClothWithOutRental(request: Request) -> Response:
     cloth_with_rental = Rental.objects.filter(state=1, ifrental=1)

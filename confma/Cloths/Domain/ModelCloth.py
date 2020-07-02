@@ -23,7 +23,7 @@ class Cloth(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "{} Talla : {}, Color : {}, Moda : {}".format(self.name,
+        return "{} Talla : {}, Color : {}, Moda : {} ,".format(self.name,
                                                              self.size,
                                                              self.color,
                                                              self.fashion)

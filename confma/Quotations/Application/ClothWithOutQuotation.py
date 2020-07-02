@@ -10,8 +10,7 @@ from ...Cloths.Infrastruture.SerializerCloth import ClothSerializer
 
 @api_view(['GET'])
 def ClothWithOutQuotation(request: Request) -> Response:
-    quotations = Quotation.objects.filter(state=1) \
-        .values_list('cloth', flat=True)
+    quotations = Quotation.objects.filter(state=1).values_list('cloth', flat=True)
     cloth_quotation = Cloth.objects.exclude(id__in=quotations)
     response = [
         ClothSerializer(

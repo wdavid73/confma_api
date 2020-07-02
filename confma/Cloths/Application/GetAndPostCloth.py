@@ -11,13 +11,13 @@ from ..Infrastruture.SerializerCloth import ClothSerializer
 class GetAndPostCloth(APIView):
     parser_class = (FileUploadParser,)
 
-    def get(self, request: Request) -> Response:
+    def get(self, request):
         cloths = Cloth.objects.filter(state=1)
         serializer = ClothSerializer(cloths, many=True,
                                      context={'request': request})
         return Response({"cloths": serializer.data})
 
-    def post(self, request: Request) -> Response:
+    def post(self, request):
         serializer = ClothSerializer(data=request.data,
                                      context={'request': request})
         if serializer.is_valid():

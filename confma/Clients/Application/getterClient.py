@@ -1,10 +1,11 @@
 from typing import List
-
+from rest_framework.request import Request
 from ..Domain.ModelClient import Client
 from ...Quotations.Domain.ModelQuotation import QuotationClient
 from ...Rentals.Domain.ModelRental import Rental
 from ...Rentals.Infrastructure.SerializerRental import RentalSerializer
-from ...serializers.quotation_client import QuotationClientSerializer
+from ...Quotations.Infrastructure.SerializerQuotationClient import \
+    QuotationClientSerializer
 
 
 def getRentalClient(client: Client, request: Request) -> List:
