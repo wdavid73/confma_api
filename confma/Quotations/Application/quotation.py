@@ -1,7 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
-
 from ..Domain.ModelQuotation import Quotation
 from ...Cloths.Domain.ModelCloth import Cloth
 
@@ -20,3 +19,5 @@ def isValidCloth(request: Request, id: int) -> Response:
         return Response({"valid": False})
     else:
         return Response({"valid": True})
+
+

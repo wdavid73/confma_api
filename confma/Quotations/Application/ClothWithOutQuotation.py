@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
-
+from rest_framework.views import APIView
 from ..Domain.ModelQuotation import Quotation
 from ...Cloths.Domain.ModelCloth import Cloth
 from ...Cloths.Infrastruture.SerializerCloth import ClothSerializer
@@ -10,7 +10,8 @@ from ...Cloths.Infrastruture.SerializerCloth import ClothSerializer
 
 @api_view(['GET'])
 def ClothWithOutQuotation(request: Request) -> Response:
-    quotations = Quotation.objects.filter(state=1).values_list('cloth', flat=True)
+    quotations = Quotation.objects.filter(state=1).values_list('cloth',
+                                                               flat=True)
     cloth_quotation = Cloth.objects.exclude(id__in=quotations)
     response = [
         ClothSerializer(
