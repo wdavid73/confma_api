@@ -34,165 +34,466 @@
   </head>
   <body>
     <div id="main" class="text-white">
-      <div class="logo">
-        <div class="text-center">
-          <p class="logo_p1 display-1">
-            mar<span style="color: #f6b93b;">i</span>bel
-          </p>
-          <hr style="width: 40%; margin: 0 auto; border-color: white;" />
-          <p class="logo_p2 display-4">
-            <span class="logo_p2">CONFECCIONES</span>
+      <div class="jumbotron" style="background-color: transparent;">
+        <div class="logo">
+          <div class="text-center">
+            <p class="logo_p1 display-1">
+              mar<span style="color: #f6b93b;">i</span>bel
+            </p>
+            <hr style="width: 40%; margin: 0 auto; border-color: white;" />
+            <p class="logo_p2 display-4">
+              <span class="logo_p2">CONFECCIONES</span>
+            </p>
+          </div>
+        </div>
+        <div class="text-justify m-5 col-5">
+          <p id="description">
+            Confecciones Marible es una Microempresa creada y sostenida por
+            Maribel Julio, Dueña y principal modista de esta, en Confecciones
+            Maribel se hace ropa a medida para todo tipo de persona , hacemos
+            ropa de muy alta calidad con una alta satisfaccion de nuestros
+            clientes.
           </p>
         </div>
-      </div>
-      <div class="endpoints ml-2">
-        <p class="ml-2 logo_p2" style="font-size: 30px;">
-          Endpoints o Rutas para el uso del api:
-        </p>
-        <div class="row">
-          <div class="col-4">
-            <div class="list-group" id="list-tab" role="tablist">
-              <a
-                class="list-group-item list-group-item-action active list-group-item-info"
-                id="list-home-list"
-                data-toggle="list"
-                href="#list-clients"
-                role="tab"
-                aria-controls="clients"
-                >Clients :</a
-              >
-              <a
-                class="list-group-item list-group-item-action list-group-item-info"
-                id="list-profile-list"
-                data-toggle="list"
-                href="#list-cloths"
-                role="tab"
-                aria-controls="cloths"
-                >Cloths :</a
-              >
-              <a
-                class="list-group-item list-group-item-action list-group-item-info"
-                id="list-messages-list"
-                data-toggle="list"
-                href="#list-rentals"
-                role="tab"
-                aria-controls="rentals"
-                >Rentals :
-              </a>
-              <a
-                class="list-group-item list-group-item-action list-group-item-info"
-                id="list-settings-list"
-                data-toggle="list"
-                href="#list-quotations"
-                role="tab"
-                aria-controls="quotations"
-                >Quotations :</a
-              >
-              <a
-                class="list-group-item list-group-item-action list-group-item-info"
-                id="list-settings-list"
-                data-toggle="list"
-                href="#list-quotations-clients"
-                role="tab"
-                aria-controls="quotations-clients"
-                >Quotations Client :</a
-              >
+        <div class="text-justify m-5 col-4">
+          <p id="description">
+            Esta pagina es solo para uso de desarrollo de aplicaciones web o
+            mobil para esta Microempresa, por lo que aqui no encontrara ningun
+            tipo de informacion, si desea algun tipo de informacion de esta
+            Microempresa porfavor comuniquese al correo
+            <strong>maribelj1962@gmail.com</strong>.
+          </p>
+        </div>
+
+        <div class="m-5" id="text">
+          <p>
+            <strong> Lista de Endpoints:</strong>
+          </p>
+          <p>
+            <div class="row">
+              <div class="col">
+                <button
+                  class="btn btn-dark btn-lg btn-block"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseClient"
+                  aria-expanded="false"
+                  aria-controls="collapseClient"
+                  id="text"
+                >
+                  Clients
+                </button>
+              </div>
+              <div class="col">
+                <button
+                  class="btn btn-secondary btn-lg btn-block"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseCloth"
+                  aria-expanded="false"
+                  aria-controls="collapseCloth"
+                  id="text"
+                >
+                  Cloths
+                </button>
+              </div>
+              <div class="col">
+                <button
+                  class="btn btn-info btn-lg btn-block"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseRental"
+                  aria-expanded="false"
+                  aria-controls="collapseRental"
+                  id="text"
+                >
+                  Rentals
+                </button>
+              </div>
+              <div class="col">
+                <button
+                  class="btn btn-primary btn-lg btn-block"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseQuotation"
+                  aria-expanded="false"
+                  aria-controls="collapseQuotation"
+                  id="text"
+                >
+                  Quotations
+                </button>
+              </div>
+              <div class="col">
+                <button
+                  class="btn btn-dark-primary btn-lg btn-block"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseQuotationClient"
+                  aria-expanded="false"
+                  aria-controls="collapseQuotationClient"
+                  id="text"
+                >
+                  Quotations Client
+                </button>
+              </div>
+            </div>
+          </p>
+          <div id="endpoints">
+          <div class="row">
+            <div class="col-6">
+              <div class="collapse" id="collapseClient">
+                <ul class="list-group m-3">
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+                  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                  </svg>
+                  api/ clients/ , Method : GET , POST
+                </p>
+                  </li>
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ clients/ details/ id/ , Method : GET
+                  </p>
+                  </li>
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ clients/ delete/ id/ , Method : POST
+                  </p>
+                  </li>
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ clients/ id/ , Method : PUT , DELETE
+                  </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="collapse" id="collapseCloth">
+                <ul
+                  class="list-group m-3"
+                  style="background-color: transparent;"
+                >
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ cloths/ , Method : GET , POST
+                  </p>
+                  </li>
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ cloths/ id/ , Method : PUT , DELETE
+                  </p>
+                  </li>
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ cloths/ delete/ id/ , Method : POST
+                  </p>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-          <div class="col-8 text-dark">
-            <div class="tab-content" id="nav-tabContent">
-              <div
-                class="tab-pane fade show active"
-                id="list-clients"
-                role="tabpanel"
-                aria-labelledby="list-clients-list"
-              >
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    api/ clients/ , Method : GET , POST
+          <div class="row">
+            <div class="col-6">
+              <div class="collapse" id="collapseRental">
+                <ul class="list-group m-3">
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ rentals/ , Method : GET , POST
+                  </p>
                   </li>
-                  <li class="list-group-item">
-                    api/ clients/ id/ , Method : PUT , DELETE
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ rentals/ cloths/ , Method : GET
+                  </p>
                   </li>
-                  <li class="list-group-item">
-                    api/ clients/ delete/ id/ , Method : POST
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ rentals/ id/ , Method : PUT , DELETE
+                  </p>
+                  </li>
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ rentals/ delete/ id/ , Method : POST
+                  </p>
+                  </li>
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ rentals/ refund/ id/ , Method : POST
+                  </p>
                   </li>
                 </ul>
               </div>
-              <div
-                class="tab-pane fade"
-                id="list-cloths"
-                role="tabpanel"
-                aria-labelledby="list-cloths-list"
-              >
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    api/ cloths/ , Method : GET , POST
-                  </li>
-                  <li class="list-group-item">
-                    api/ cloths/ id/ , Method : PUT , DELETE
-                  </li>
-                  <li class="list-group-item">
-                    api/ cloths/ delete/ id/ , Method : POST
-                  </li>
-                </ul>
-              </div>
-              <div
-                class="tab-pane fade"
-                id="list-rentals"
-                role="tabpanel"
-                aria-labelledby="list-rentals-list"
-              >
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    api/ rentals/ , Method : GET , POST
-                  </li>
-                  <li class="list-group-item">
-                    api/ rentals/ id/ , Method : PUT , DELETE
-                  </li>
-                  <li class="list-group-item">
-                    api/ rentals/ delete/ id/ , Method : POST
-                  </li>
-                </ul>
-              </div>
-              <div
-                class="tab-pane fade"
-                id="list-quotations"
-                role="tabpanel"
-                aria-labelledby="list-quotations-list"
-              >
-                <ul class="list-group">
-                  <li class="list-group-item">
+            </div>
+            <div class="col-6">
+              <div class="collapse" id="collapseQuotation">
+                <ul class="list-group m-3">
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                    
+                  >
+                  <p id="list_endpoints">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
                     api/ quotations/ , Method : GET , POST
+                  </p>
                   </li>
-                  <li class="list-group-item">
-                    api/ quotations/ id/ , Method : PUT , DELETE
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ quotations_cloth/, Method : GET
+                  </p>
                   </li>
-                  <li class="list-group-item">
-                    api/ quotations/ delete/ id/ , Method : POST
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ quotations/ id/ , Method : PUT, DELETE
+                  </p>
                   </li>
-                </ul>
-              </div>
-              <div
-                class="tab-pane fade"
-                id="list-quotations-clients"
-                role="tabpanel"
-                aria-labelledby="list-quotations-clients-list"
-              >
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    api/ quotations-clients/ , Method : GET , POST
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ quotations/ delete/ id/ , Method : POST
+                  </p>
                   </li>
-                  <li class="list-group-item">
-                    api/ quotations-clients/ id/ , Method : PUT , DELETE
-                  </li>
-                  <li class="list-group-item">
-                    api/ quotations-clients/ delete/ id/ , Method : POST
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ quotations/ isvalidcloth/ id/ , Method : GET
+                  </p>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-8">
+              <div class="collapse" id="collapseQuotationClient">
+                <ul class="list-group m-3">
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ quotations-clients/ , Method : GET , POST
+                  </p>
+                  </li>
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ quotations-clients/ id/ , Method : PUT, DELETE
+                  </p>
+                  </li>
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ quotations-clients/ delete/ id/ , Method : POST
+                  </p>
+                  </li>
+                  <li
+                    class="list-group-item"
+                    style="
+                      background-color: transparent;
+                      border-color: transparent;
+                    "
+                  >
+                  <p id="list_endpoints">
+
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                    </svg>
+                      api/ quotations-clients/ clientnotduplicated/ id/ , Method :GET
+                  </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     </div>
@@ -200,35 +501,44 @@
 </html>
 
 <style>
-  body,
-  html {
-    height: 100%;
-  }
-  body {
-    background-image: url("/static/background_image2.jpg");
+ 
+  #main {
+    background-image: url("/static/airplane_paper.jpg");
+    background-size: cover;
     background-repeat: no-repeat;
-    background-size: cover;
     background-position: center;
+    
     min-height: 100%;
-    background-size: cover;
   }
-  .logo {
-    margin-top: 3%;
-  }
+
   .logo_p1 {
     font-family: "Merienda", cursive;
-    padding-top: -20px;
+    /*padding-top: -20px;*/
     margin: 0 auto;
   }
   .logo_p2 {
     font-family: "Playfair Display", serif;
   }
-  .text {
+  #description {
+    font-size: 27px;
     font-family: "Dancing Script", cursive;
   }
-  .endpoints {
-    font-family: "Merienda", cursive;
-    width: 50%;
+  #text {
     font-size: 25px;
+    font-family: "Dancing Script", cursive;
+  }
+  #endpoints {
+    height: 1000px;
+  }
+  .btn-dark-primary {
+    background-color: #273c75;
+    color: white;
+  }
+  .btn-dark-primary:hover {
+    background-color: #192a56;
+    color: white;
+  }
+  #list_endpoints{
+    font-size: 30px;
   }
 </style>
