@@ -23,7 +23,7 @@ class RentalSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Rental
-        fields = ['id', 'date_return', 'price', 'ifrental',
+        fields = ['id', 'date_return', 'date_now','price', 'ifrental',
                   'cloth', 'clothId', 'client', 'clientId', ]
         extra_kwargs = {
             "price": {

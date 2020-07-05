@@ -9,15 +9,14 @@ from ..Infrastructure.SerializerRental import RentalSerializer
 
 
 class PutAndDeleteRental(APIView):
-
-    def get(self, request: Request, id: int) -> Response:
-        rental = get_object_or_404(Rental, id=id)
-        serializer = RentalSerializer(rental,
-                                      context={'request': request})
-        return Response(serializer.data)
+    def get_object(self, id):
+        try:
+            return Rental.objects.get(id=id)
+        except Rental.DoesNotExist:
+            raise Http404
 
     def put(self, request: Request, id: int) -> Response:
-        rental = get_object_or_404(Rental, id=id)
+        rental = self.get_object(id=id)
         serializer = RentalSerializer(rental, data=request.data,
                                       context={'request': request})
         if serializer.is_valid():
@@ -27,6 +26,6 @@ class PutAndDeleteRental(APIView):
                         status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request: Request, id: int) -> Response:
-        rental = get_object_or_404(Rental, id=id)
+        rental = self.get_object(id=id)
         rental.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
