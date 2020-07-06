@@ -9,8 +9,10 @@ from ...Application.QuotationClient.PutAndDelete import \
     PutAndDeleteQuotationClient
 
 urlpatterns = [
-    path('', GetAndPostQuotationClient.as_view(),name="quotation_client"),
-    path('<id>/',PutAndDeleteQuotationClient.as_view(),name="quotation_client_detail"),
-    path('delete/<int:_id>/',delete_log, name='qc_delete'),
-    path('clientnotduplicated/<int:_id>/',ClientNotDuplicatedInQuotation,name='qc_client_not_duplicated'),
+    path('', GetAndPostQuotationClient.as_view(), name="quotation_client"),
+    path('<id>/', PutAndDeleteQuotationClient.as_view(),
+         name="quotation_client_detail"),
+    path('delete/<int:_id>/', delete_log, name='qc_delete'),
+    path('client_valid/<int:_id>/', ClientNotDuplicatedInQuotation,
+         name='client_id'),
 ]
