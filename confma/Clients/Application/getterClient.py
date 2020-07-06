@@ -10,9 +10,12 @@ from ...Quotations.Infrastructure.SerializerQuotationClient import \
 
 def getRentalClient(client: Client, request: Request) -> List:
     response = [
-        RentalSerializer(rental, context={'request': request}).data for
-        rental in
-        Rental.objects.all().filter(state=1, client=client)]
+        RentalSerializer(
+            rental,
+            context={'request': request}
+        ).data for rental in Rental.objects.all().filter(state=1,
+                                                         client=client)
+    ]
     return response
 
 
