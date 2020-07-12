@@ -3,7 +3,7 @@ from typing import List
 from rest_framework.request import Request
 
 from ...Cloths.Domain.ModelCloth import Cloth
-from ...Domain.ModelQuotation import Quotation
+from ...Quotations.Domain.ModelQuotation import Quotation
 from ...Quotations.Infrastructure.SerializerQuotation import \
     QuotationSerializer
 from ...Rentals.Domain.ModelRental import Rental
