@@ -1,3 +1,5 @@
+from decouple import config
+import dj_database_url
 """
 Django settings for confecciones_maribel_api project.
 
@@ -78,24 +80,23 @@ WSGI_APPLICATION = 'confecciones_maribel_api.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ltxdnswb',
-        'USER': 'ltxdnswb',
-        'PASSWORD': 'AATDt-j_FHYCZbQpbC4HADrebKPZ50cv',
-        'HOST': 'drona.db.elephantsql.com',
-        'PORT': 5432
+if(DEBUG == True): # DEVELOPMENT
+    DATABASES = {
+        'default':  {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'ltxdnswb',
+            'USER': 'ltxdnswb',
+            'PASSWORD': 'AATDt-j_FHYCZbQpbC4HADrebKPZ50cv',
+            'HOST': 'drona.db.elephantsql.com',
+            'PORT': 5432
+        }
     }
-}
-
-#import dj_database_url
-#from decouple import config
-#DATABASES = {
-#    'default' : dj_database_url.config(
-#        default=config("DATABASE_URL")
-#    )
-#}
+else: # PRODUCTION
+ DATABASES = {
+     'default' : dj_database_url.config(
+         default = config("DATABASE_URL")
+     ),
+ }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -143,7 +144,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 REST_FRAMEWORK = {
     # para produccion
     'DEFAULT_RENDERER_CLASSES': (
-         'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.JSONRenderer',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 5

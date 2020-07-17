@@ -1,0 +1,10 @@
+# Environment variables
+.env
+
+## DJANGO PYTHON
+__pycache__
+
+## FOLDERS OF IDE JETBRANS AND VSCODE
+.idea
+.history
+
