@@ -1,16 +1,21 @@
-### CONFMA API DJANGO
+# CONFMA API DJANGO
 
-# Requisitos
+### Requisitos
 
 - Python 3.7+
 - Django 3.0.7+
 
-# Instalacion
+### Instalacion y Ejecucion
 
-1. Ejecutar el virtual enviroment
-   - source bin/activate
-2. Entrar a la carpeta del proyecto
-   - instalar las librerias
-     - pip install -r requirements.txt
-3. ejercutar el proyecto
-   - python manage.py runserver
+1. Instalar el virtual env
+   - `pip install vitualenv`
+2. Activar el virtualenv
+   - entrar a la carpeta del virtualenv
+   - ejercutar `source bin/activate`
+3. clonar el repositorio
+   - git clone 
+4. instalar librerias
+   - entrar a la carpeta del proyecto
+   - ejecutar `pip install -r requirements.txt`
+5. Ejecutar el proyecto
+   - `python manage.py runserver`
