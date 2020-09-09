@@ -15,4 +15,4 @@ class GetShirtsUniformFemale(APIView):
         shirts = ShirtsUniformFemale.objects.filter(state=1)
         serializer = ShirstFemaleSerializer(
             shirts, many=True, context={'request': request})
-        return Response({'dresses': serializer.data})
+        return Response({'shirts_female': serializer.data})

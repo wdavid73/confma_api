@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
-from ..Domain.ModelUniform import Uniforms
+from ..Domain.ModelUniformSports import UniformsSports
 
 
-class UniformSerializer(serializers.ModelSerializer):
+class UniformSportsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Uniforms
+        model = UniformsSports
         fields = ['id', 'name_college', 'size', 'type_uniform', 'image']
 
         extra_kwargs = {

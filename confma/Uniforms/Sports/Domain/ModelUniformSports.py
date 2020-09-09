@@ -6,14 +6,12 @@ list_size = ListSizeCloth()
 list_type_uniform = ListTypeUniform()
 
 
-class Uniforms(models.Model):
+class UniformsSports(models.Model):
     name_college = models.CharField(max_length=100, null=False)
-    size = models.CharField(max_length=10, null=False,
-                            blank=False, choices=list_size, default=1)
-
-    type_uniform = models.CharField(max_length=10, null=False,
-                                    blank=False, choices=list_type_uniform, default=1)
-    image = models.ImageField(upload_to='uniforms/sports/%Y/%m/%d')
+    price = models.DecimalField(
+        max_digits=10, decimal_places=2, null=False, default=0)
+    type_uniform = models.CharField(
+        max_length=10, null=False, blank=False, choices=list_type_uniform, default=1)
     state = models.SmallIntegerField(default=1, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -22,7 +20,7 @@ class Uniforms(models.Model):
         return"Uniforme del Colegio : {}, Talla : {}".format(self.name_college, self.size)
 
     def get_absolute_url(self):
-        return reverse("confma:uniform_detail", kwargs={'_id': self.id})
+        return reverse("confma:uniform_sports_detail", kwargs={'_id': self.id})
 
     class Meta:
-        db_table = "Uniforms"
+        db_table = "UniformsSports"
