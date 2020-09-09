@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'confecciones_maribel_api.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
-if(DEBUG == True): # DEVELOPMENT
+if(DEBUG == True):  # DEVELOPMENT
     DATABASES = {
         'default':  {
             'ENGINE': 'django.db.backends.postgresql',
@@ -91,12 +91,12 @@ if(DEBUG == True): # DEVELOPMENT
             'PORT': 5432
         }
     }
-else: # PRODUCTION
- DATABASES = {
-     'default' : dj_database_url.config(
-         default = config("DATABASE_URL")
-     ),
- }
+else:  # PRODUCTION
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=config("DATABASE_URL")
+        ),
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -143,9 +143,9 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 REST_FRAMEWORK = {
     # para produccion
-    'DEFAULT_RENDERER_CLASSES': (
+    """  'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
-    ),
+    ), """
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 5
 }

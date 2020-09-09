@@ -1,14 +1,9 @@
 from django.db import models
 from django.urls import reverse
+from ...General.Application.list_general import ListSizeCloth, ListTypeUniform
 
-list_size = [
-    ('XS', 'XS'),
-    ('S', 'S'),
-    ('M', 'M'),
-    ('L', 'L'),
-    ('XL', 'XL'),
-    ('XXL', 'XXL'),
-]
+list_size = ListSizeCloth()
+list_type_uniform = ListTypeUniform()
 
 
 class Cloth(models.Model):

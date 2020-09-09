@@ -9,7 +9,7 @@ urlpatterns = [
     path('quotations/', include('confma.Quotations.Domain.urls')),
     path('quotations-clients/', include('confma.Quotations.Domain'
                                         '.QuotationClient.urls')),
-
+    path('uniforms/', include('confma.Uniforms.Domain.urls')),
     path('api-auth/',
          include('rest_framework.urls', namespace='rest_framework'))
 
