@@ -13,7 +13,7 @@ class Uniforms(models.Model):
 
     type_uniform = models.CharField(max_length=10, null=False,
                                     blank=False, choices=list_type_uniform, default=1)
-    image = models.ImageField(upload_to='uniforms/%Y/%m/%d')
+    image = models.ImageField(upload_to='uniforms/sports/%Y/%m/%d')
     state = models.SmallIntegerField(default=1, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
