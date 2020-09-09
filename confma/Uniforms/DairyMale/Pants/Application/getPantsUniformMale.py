@@ -1,0 +1,18 @@
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.parsers import FileUploadParser
+from rest_framework.request import Request
+from rest_framework.response import Response
+
+from ..Domain.ModelPantsUniformMale import PantsUniformMale
+from ..Infrastructure.SerializerShirstMale import PantsMaleSerializer
+
+
+class GetPantsUniformFemale(APIView):
+    parser_class = FileUploadParser
+
+    def get(self, request: Request) -> Response:
+        shirts = PantsUniformMale.objects.filter(state=1)
+        serializer = PantsMaleSerializer(
+            shirts, many=True, context={'request': request})
+        return Response({'dresses': serializer.data})
