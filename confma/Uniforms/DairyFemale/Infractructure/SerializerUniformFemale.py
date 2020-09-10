@@ -1,12 +1,31 @@
 from rest_framework import serializers
 
 from ..Domain.ModelUniformFemale import UniformsFemale
+from ..Dresses.Infrastructure.SerializerDresses import DressSerializer
+from ..Dresses.Domain.ModelDresses import DressesUniform
+from ..Shirts.Infrastructure.SerializerShirstFemale import ShirstFemaleSerializer
+from ..Shirts.Domain.ModelShirtsUniformFemale import ShirtsUniformFemale
 
 
 class UniformFemaleSerializer(serializers.ModelSerializer):
+    dress = DressSerializer(read_only=True)
+    dress_id = serializers.PrimaryKeyRelatedField(
+        write_only=True,
+        queryset=DressesUniform.objects.filter(state=1),
+        source='dress'
+    )
+
+    shirt = ShirstFemaleSerializer(read_only=True)
+    shirt_id = serializers.PrimaryKeyRelatedField(
+        write_only=True,
+        queryset=ShirtsUniformFemale.objects.filter(state=1),
+        source='shirt'
+    )
+
     class Meta:
         model = UniformsFemale
-        fields = ['id', 'name_college', 'size', 'type_uniform', 'image']
+        fields = ['id', 'name_college', 'price', 'dress_id',
+                  'dress', 'shirt_id', 'shirt']
 
         extra_kwargs = {
             "name_college": {

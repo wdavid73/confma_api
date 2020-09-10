@@ -9,7 +9,8 @@ class ShirtsUniformFemale(models.Model):
                             blank=False, choices=list_size, default=1)
     price = models.DecimalField(
         max_digits=10, decimal_places=2, null=False, default=0)
-    image = models.ImageField(upload_to='uniforms/Female/shirts/%Y/%m/%d/')
+    image = models.ImageField(
+        upload_to='uniforms/Female/shirts/%Y/%m/%d/', null=True)
     state = models.SmallIntegerField(default=1, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
