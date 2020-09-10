@@ -1,7 +1,9 @@
 from django.urls import path,include
 
-from ..Application.getShirtsUniformFemale import GetShirtsUniformFemale
-
+from ..Application.GetAndPostShirtsFemale import GetAndPost
+from ..Application.PutAndDelete import PutAndDelete
 urlpatterns = [
-    path('', GetShirtsUniformFemale.as_view(), name="get_shirts_female"),
+    path('', GetAndPost.as_view(), name="get_shirts_female"),
+    path('<id>/',PutAndDelete.as_view(),name="shirts_female_details")
+
 ]

@@ -23,7 +23,7 @@ class DressesUniform(models.Model):
         )
 
     def get_absolute_url(self):
-        return reverse("confma:dresses_uniform_detail", kwargs={'_id': self.id})
+        return reverse("confma:dresses_detail", kwargs={'_id': self.id})
 
     class Meta:
         db_table = "DressesUniform"

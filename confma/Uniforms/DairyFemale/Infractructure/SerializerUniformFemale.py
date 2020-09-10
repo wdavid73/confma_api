@@ -4,7 +4,7 @@ from ..Domain.ModelUniformFemale import UniformsFemale
 from ..Dresses.Infrastructure.SerializerDresses import DressSerializer
 from ..Dresses.Domain.ModelDresses import DressesUniform
 from ..Shirts.Infrastructure.SerializerShirstFemale import ShirstFemaleSerializer
-from ..Shirts.Domain.ModelShirtsUniformFemale import ShirtsUniformFemale
+from ..Shirts.Domain.ModelShirtsFemale import ShirtsFemale
 
 
 class UniformFemaleSerializer(serializers.ModelSerializer):
@@ -18,7 +18,7 @@ class UniformFemaleSerializer(serializers.ModelSerializer):
     shirt = ShirstFemaleSerializer(read_only=True)
     shirt_id = serializers.PrimaryKeyRelatedField(
         write_only=True,
-        queryset=ShirtsUniformFemale.objects.filter(state=1),
+        queryset=ShirtsFemale.objects.filter(state=1),
         source='shirt'
     )
 

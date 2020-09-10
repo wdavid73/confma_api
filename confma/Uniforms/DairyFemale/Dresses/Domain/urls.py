@@ -1,7 +1,9 @@
-from django.urls import path,include
+from django.urls import path, include
 
-from ..Application.GetDressUniform import GetDressUniform
+from ..Application.GetAndPostDresses import GetAndPostDress
+from ..Application.PutAndDeleteDresses import PutAndDeleteDresses
 
 urlpatterns = [
-    path('', GetDressUniform.as_view(), name="get_dresses"),
+    path('', GetAndPostDress.as_view(), name="dresses"),
+    path('<id>/' ,PutAndDeleteDresses.as_view(), name="dresses_details" )
 ]

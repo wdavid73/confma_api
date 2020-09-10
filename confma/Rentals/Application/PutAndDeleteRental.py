@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.http import Http404
 
 from ..Domain.ModelRental import Rental
 from ..Infrastructure.SerializerRental import RentalSerializer

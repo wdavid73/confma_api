@@ -8,7 +8,7 @@ from ..Domain.ModelDresses import DressesUniform
 from ..Infrastructure.SerializerDresses import DressSerializer
 
 
-class GetDressUniform(APIView):
+class GetAndPostDress(APIView):
     parser_class = FileUploadParser
 
     def get(self, request: Request) -> Response:
@@ -16,3 +16,12 @@ class GetDressUniform(APIView):
         serializer = DressSerializer(
             dresses, many=True, context={'request': request})
         return Response({'dresses': serializer.data})
+
+    def post(self,request: Request) -> Response:
+        serializer = DressSerializer(
+            data = request.data , context = {"request":request}
+        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response (serializer.data , status=status.HTTP_201_CREATED)
+        return Response (serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -4,7 +4,7 @@ from .....General.Application.list_general import ListSizeCloth, ListTypeUniform
 list_size = ListSizeCloth()
 
 
-class ShirtsUniformFemale(models.Model):
+class ShirtsFemale(models.Model):
     size = models.CharField(max_length=10, null=False,
                             blank=False, choices=list_size, default=1)
     price = models.DecimalField(
@@ -21,7 +21,7 @@ class ShirtsUniformFemale(models.Model):
             self.size,)
 
     def get_absolute_url(self):
-        return reverse("confma:shirst_uniform_female_detail", kwargs={'_id': self.id})
+        return reverse("confma:shirts_female_details", kwargs={'_id': self.id})
 
     class Meta:
         db_table = "ShirtsUniformFemale"
