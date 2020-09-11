@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from django.http import Http404
 
 from ..Domain.ModelShirtsFemale import ShirtsFemale
-from ..Infrastructure.SerializerShirstFemale import ShirstFemaleSerializer
+from ..Infrastructure.SerializerShirstFemale import ShirtsFemaleSerializer
 
 class PutAndDelete(APIView):
     def get_object(self, id):
@@ -17,7 +17,7 @@ class PutAndDelete(APIView):
 
     def put(self, request: Request, id: int) -> Response:
         uniform_female = self.get_object(id)
-        serializer = ShirstFemaleSerializer(
+        serializer = ShirtsFemaleSerializer(
             uniform_female, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()

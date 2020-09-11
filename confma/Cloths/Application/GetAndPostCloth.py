@@ -8,16 +8,16 @@ from ..Domain.ModelCloth import Cloth
 from ..Infrastruture.SerializerCloth import ClothSerializer
 
 
-class GetAndPostCloth(APIView):
+class GetAndPost(APIView):
     parser_class = (FileUploadParser,)
 
-    def get(self, request):
+    def get(self, request : Request) -> Response:
         cloths = Cloth.objects.filter(state=1)
         serializer = ClothSerializer(cloths, many=True,
                                      context={'request': request})
         return Response({"cloths": serializer.data})
 
-    def post(self, request):
+    def post(self, request: Request) -> Response:
         serializer = ClothSerializer(data=request.data,
                                      context={'request': request})
         if serializer.is_valid():

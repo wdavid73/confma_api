@@ -1,10 +1,8 @@
 from django.db import models
 from django.urls import reverse
-from ....General.Application.list_general import ListSizeCloth, ListTypeUniform
 from ..Pants.Domain.ModelPantsMale import PantsMale
 from ..Shirts.Domain.ModelShirtsMale import ShirtsMale
-list_size = ListSizeCloth()
-list_type_uniform = ListTypeUniform()
+
 
 
 class UniformsMale(models.Model):

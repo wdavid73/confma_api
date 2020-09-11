@@ -7,8 +7,7 @@ urlpatterns = [
     path('cloths/', include('confma.Cloths.Domain.urls')),
     path('rentals/', include('confma.Rentals.Domain.urls')),
     path('quotations/', include('confma.Quotations.Domain.urls')),
-    path('quotations-clients/', include('confma.Quotations.Domain'
-                                        '.QuotationClient.urls')),
+    path('quotations-clients/', include('confma.Quotations.QuotationClient.Domain.urls')),
     path('uniforms/', include('confma.Uniforms.Domain.urls')),
     path('api-auth/',
          include('rest_framework.urls', namespace='rest_framework'))

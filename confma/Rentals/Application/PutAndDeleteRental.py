@@ -9,7 +9,7 @@ from ..Domain.ModelRental import Rental
 from ..Infrastructure.SerializerRental import RentalSerializer
 
 
-class PutAndDeleteRental(APIView):
+class PutAndDelete(APIView):
     def get_object(self, id):
         try:
             return Rental.objects.get(id=id)

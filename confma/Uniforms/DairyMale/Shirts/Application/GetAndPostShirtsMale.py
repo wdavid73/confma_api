@@ -9,7 +9,7 @@ from ..Infrastructure.SerializerShirstMale import ShirtsMaleSerializer
 
 
 class GetAndPost(APIView):
-    parser_class = FileUploadParser
+    parser_class = (FileUploadParser,)
 
     def get(self, request: Request) -> Response:
         shirts = ShirtsMale.objects.filter(state=1)

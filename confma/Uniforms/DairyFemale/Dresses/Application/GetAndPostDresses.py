@@ -8,8 +8,8 @@ from ..Domain.ModelDresses import DressesUniform
 from ..Infrastructure.SerializerDresses import DressSerializer
 
 
-class GetAndPostDress(APIView):
-    parser_class = FileUploadParser
+class GetAndPost(APIView):
+    parser_class = (FileUploadParser,)
 
     def get(self, request: Request) -> Response:
         dresses = DressesUniform.objects.filter(state=1)

@@ -9,7 +9,7 @@ from ..Domain.ModelUniformFemale import UniformsFemale
 from ..Infractructure.SerializerUniformFemale import UniformFemaleSerializer
 
 
-class PutAndDeleteUniformFemale(APIView):
+class PutAndDelete(APIView):
     def get_object(self, id):
         try:
             return UniformsFemale.objects.get(id=id)

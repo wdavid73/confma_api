@@ -2,7 +2,7 @@ from typing import List
 
 
 def ListSizeCloth() -> List:
-    list = [
+    list_size = [
         ('XS', 'XS'),
         ('S', 'S'),
         ('M', 'M'),
@@ -10,13 +10,20 @@ def ListSizeCloth() -> List:
         ('XL', 'XL'),
         ('XXL', 'XXL'),
     ]
-    return list
+    return list_size
 
 
 def ListTypeUniform() -> List:
-    list = [
+    list_type = [
         ("Female", 'Female'),
         ("Male", "Male")
     ]
 
-    return list
+    return list_type
+
+def ListFashionCloth() -> List:
+    list_fashion = [
+        ("General" , "General"),
+        ("A Medida" , "A Medida")
+    ]
+    return list_fashion

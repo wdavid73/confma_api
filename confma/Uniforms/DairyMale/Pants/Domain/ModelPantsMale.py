@@ -15,9 +15,10 @@ class PantsMale(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Pants Uniform Male id : {} Talla : {},".format(
+        return "Pants Uniform Male id : {} Talla : {}, Precio : {}".format(
             self.id,
-            self.size,)
+            self.size,
+            self.price,)
 
     def get_absolute_url(self):
         return reverse("confma:pants_male_detail", kwargs={'_id': self.id})

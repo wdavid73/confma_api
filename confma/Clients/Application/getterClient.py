@@ -4,7 +4,7 @@ from ..Domain.ModelClient import Client
 from ...Quotations.Domain.ModelQuotation import QuotationClient
 from ...Rentals.Domain.ModelRental import Rental
 from ...Rentals.Infrastructure.SerializerRental import RentalSerializer
-from ...Quotations.Infrastructure.SerializerQuotationClient import \
+from ...Quotations.Infractructure.SerializerQuotationClient import \
     QuotationClientSerializer
 
 

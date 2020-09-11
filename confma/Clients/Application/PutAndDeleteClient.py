@@ -5,10 +5,10 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from ..Domain.ModelClient import Client
-from ..Infrastructure.SerializerClient import ClientSerializer
+from ..Infractructure.SerializerClient import ClientSerializer
 
 
-class PutAndDeleteClient(APIView):
+class PutAndDelete(APIView):
     def get_object(self, id):
         try:
             return Client.objects.get(id=id)

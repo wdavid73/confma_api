@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from ...Clients.Domain.ModelClient import Client
-from ...Clients.Infrastructure.SerializerClient import ClientSerializer
+from ...Clients.Infractructure.SerializerClient import ClientSerializer
 from ...Cloths.Domain.ModelCloth import Cloth
 from ...Cloths.Infrastruture.SerializerCloth import ClothSerializer
 from ...Rentals.Domain.ModelRental import Rental

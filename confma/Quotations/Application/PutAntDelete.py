@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from ..Domain.ModelQuotation import Quotation
-from ..Infrastructure.SerializerQuotation import QuotationSerializer
+from ..Infractructure.SerializerQuotation import QuotationSerializer
 
 
 class PutAndDelete(APIView):

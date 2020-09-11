@@ -4,10 +4,10 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from ..Domain.ModelClient import Client
-from ..Infrastructure.SerializerClient import ClientSerializer
+from ..Infractructure.SerializerClient import ClientSerializer
 
 
-class GetAndPostClient(APIView):
+class GetAndPost(APIView):
 
     def get(self, request: Request) -> Response:
         clients = Client.objects.filter(state=1)

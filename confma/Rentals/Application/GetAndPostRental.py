@@ -9,7 +9,7 @@ from ..Domain.ModelRental import Rental
 from ..Infrastructure.SerializerRental import RentalSerializer
 
 
-class GetAndPostRental(APIView):
+class GetAndPost(APIView):
     def get(self, request: Request) -> Response:
         rentals = Rental.objects.filter(state=1, ifrental=1)
         serializer = RentalSerializer(rentals, many=True,

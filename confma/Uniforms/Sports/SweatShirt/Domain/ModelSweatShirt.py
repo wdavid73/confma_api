@@ -11,8 +11,6 @@ class SweatShirt(models.Model):
                             blank=False, choices=list_size, default=1)
     price = models.DecimalField(
         max_digits=10, decimal_places=2, null=False, default=0)
-    type = models.CharField(max_length=10, null=False,
-                            blank=False, choices=list_type, default=1)
     image = models.ImageField(upload_to='uniforms/sports/sweatshirt/%Y/%m/%d/',null=True)
     state = models.SmallIntegerField(default=1, null=False)
     created_at = models.DateTimeField(auto_now_add=True)

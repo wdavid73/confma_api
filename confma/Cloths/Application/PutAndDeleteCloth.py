@@ -8,7 +8,7 @@ from ..Domain.ModelCloth import Cloth
 from ..Infrastruture.SerializerCloth import ClothSerializer
 
 
-class PutAndDeleteCloth(APIView):
+class PutAndDelete(APIView):
     def get_object(self, id: int) -> Cloth:
         try:
             return Cloth.objects.get(id=id)

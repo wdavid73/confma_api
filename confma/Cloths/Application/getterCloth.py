@@ -4,7 +4,7 @@ from rest_framework.request import Request
 
 from ...Cloths.Domain.ModelCloth import Cloth
 from ...Quotations.Domain.ModelQuotation import Quotation
-from ...Quotations.Infrastructure.SerializerQuotation import \
+from ...Quotations.Infractructure.SerializerQuotation import \
     QuotationSerializer
 from ...Rentals.Domain.ModelRental import Rental
 from ...Rentals.Infrastructure.SerializerRental import RentalSerializer

@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from ..Domain.ModelQuotation import Quotation
-from ..Infrastructure.SerializerQuotation import QuotationSerializer
+from ..Infractructure.SerializerQuotation import QuotationSerializer
 from ...Cloths.Domain.ModelCloth import Cloth
 
 
@@ -18,13 +18,14 @@ class GetAndPost(APIView):
 
     def post(self, request: Request) -> Response:
         if not ClothDuplicated(request.data['clothId']):
-            total = getTotal(
+            """total = getTotal(
                 request.data['value_work'], request.data['value_cloth'],
                 request.data['value_buttons'],
                 request.data['value_threads'],
                 request.data['value_necks'],
                 request.data['value_embroidery'],
-                request.data['value_prints'])
+                request.data['value_prints'])"""
+            total = getTotal2(request.data)
             request.data['total'] = str(total)
             serializer = QuotationSerializer(
                 data=request.data, context={'request': request})
@@ -49,3 +50,14 @@ def getTotal(vw: int, vc: int, vb: int, vt: int,
              vn: int, ve: int, vp: int) -> int:
     return int(vw) + int(vc) + int(vb) + int(vt) + int(vn) + int(
         ve) + int(vp)
+
+def getTotal2(data):
+    return (
+            int(data['value_work'])+
+            int(data['value_cloth'])+
+            int(data['value_buttons'])+
+            int(data['value_threads'])+
+            int(data['value_necks'])+
+            int(data['value_embroidery'])+
+            int(data['value_prints'])
+    )

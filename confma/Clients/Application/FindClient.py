@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 from ..Domain.ModelClient import Client
-from ..Infrastructure.SerializerClient import ClientSerializer
+from ..Infractructure.SerializerClient import ClientSerializer
 
 
 class FindClient(APIView):
@@ -26,7 +26,7 @@ class FindClient(APIView):
 def GetQuotationByClient(client: Client, request: Request) -> List:
     from ...Quotations.Domain.ModelQuotation import Quotation
     from ...Quotations.Domain.ModelQuotation import QuotationClient
-    from ...Quotations.Infrastructure.SerializerQuotation import \
+    from ...Quotations.Infractructure.SerializerQuotation import \
         QuotationSerializer
     quotation_client = QuotationClient.objects.filter(state=1,
                                                       client=client)
@@ -48,7 +48,7 @@ def GetRentalByClient(client: Client, request: Request) -> Tuple[
     from ...Quotations.Domain.ModelQuotation import Quotation
     from ...Rentals.Infrastructure.SerializerRental import \
         RentalSerializer
-    from ...Quotations.Infrastructure.SerializerQuotation import \
+    from ...Quotations.Infractructure.SerializerQuotation import \
         QuotationSerializer
 
     rentalsResponse = [

@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from .....General.Application.list_general import ListSizeCloth, ListTypeUniform
+from .....General.Application.list_general import ListSizeCloth
 list_size = ListSizeCloth()
 
 
@@ -15,9 +15,10 @@ class ShirtsMale(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Shirst Uniform Male id : {} Talla : {},".format(
+        return "Shirst Uniform Male id : {} Talla : {}, Precio : {}".format(
             self.id,
-            self.size,)
+            self.size,
+            self.price)
 
     def get_absolute_url(self):
         return reverse("confma:shirts_male_detail", kwargs={'_id': self.id})

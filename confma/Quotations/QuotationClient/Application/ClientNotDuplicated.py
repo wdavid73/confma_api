@@ -4,7 +4,7 @@ from rest_framework.response import Response
 
 from ...Domain.ModelQuotation import Quotation, QuotationClient
 from ....Clients.Domain.ModelClient import Client
-from ....Clients.Infrastructure.SerializerClient import ClientSerializer
+from ....Clients.Infractructure.SerializerClient import ClientSerializer
 
 
 @api_view(['GET'])

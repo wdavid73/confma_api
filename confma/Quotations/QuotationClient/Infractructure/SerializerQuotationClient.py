@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from ..Domain.ModelQuotation import QuotationClient, Client, Quotation
-from ..Infrastructure.SerializerQuotation import QuotationSerializer
-from ...Clients.Infrastructure.SerializerClient import ClientSerializer
-
+from ...Domain.ModelQuotation import QuotationClient,Quotation
+from ....Clients.Domain.ModelClient import Client
+from ...Infractructure.SerializerQuotation import QuotationSerializer
+from ....Clients.Infractructure.SerializerClient import ClientSerializer
 
 class QuotationClientSerializer(serializers.ModelSerializer):
     client = ClientSerializer(read_only=True, many=False)

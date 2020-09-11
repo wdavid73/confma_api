@@ -17,9 +17,9 @@ class PutAndDelete(APIView):
             raise Http404
 
     def put(self, request: Request, id: int) -> Response:
-        uniform_female = self.get_object(id)
+        shirts_sport = self.get_object(id)
         serializer = ShirtsSportsSerializer(
-            uniform_female, data=request.data, context={'request': request})
+            shirts_sport, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)

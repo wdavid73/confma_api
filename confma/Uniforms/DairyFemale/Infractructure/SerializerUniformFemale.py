@@ -3,7 +3,7 @@ from rest_framework import serializers
 from ..Domain.ModelUniformFemale import UniformsFemale
 from ..Dresses.Infrastructure.SerializerDresses import DressSerializer
 from ..Dresses.Domain.ModelDresses import DressesUniform
-from ..Shirts.Infrastructure.SerializerShirstFemale import ShirstFemaleSerializer
+from ..Shirts.Infrastructure.SerializerShirstFemale import ShirtsFemaleSerializer
 from ..Shirts.Domain.ModelShirtsFemale import ShirtsFemale
 
 
@@ -15,7 +15,7 @@ class UniformFemaleSerializer(serializers.ModelSerializer):
         source='dress'
     )
 
-    shirt = ShirstFemaleSerializer(read_only=True)
+    shirt = ShirtsFemaleSerializer(read_only=True)
     shirt_id = serializers.PrimaryKeyRelatedField(
         write_only=True,
         queryset=ShirtsFemale.objects.filter(state=1),
@@ -35,25 +35,27 @@ class UniformFemaleSerializer(serializers.ModelSerializer):
                         "invalid": "please enter a valid name"
                     }
             },
-            "size": {
+            "price": {
                 "error_messages":
                     {
-                        "required": "please select a size of uniform",
-                        "invalid": "please select a valid size"
+                        "required": "please input a price of uniform",
+                        "invalid": "please input a valid price"
                     }
             },
-            "type_uniform": {
+
+            "dress_id": {
                 "error_messages":
                     {
-                        "required": "please select a type of uniform of uniform",
-                        "invalid": "please select a valid type of uniform"
+                        "required": "please input a dress",
+                        "invalid": "please input a valid dress"
                     }
             },
-            "image": {
+
+            "shirt_id": {
                 "error_messages":
                     {
-                        "required": "please enter a reference image for uniform",
-                        "invalid": "Please Enter a image valid"
+                        "required": "please input a shirt ",
+                        "invalid": "please input a valid shirt"
                     }
             }
         }

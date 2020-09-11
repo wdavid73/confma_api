@@ -6,4 +6,4 @@ from ..Domain.ModelSweatShirt import SweatShirt
 class SweatShirtSerializer(serializers.ModelSerializer):
     class Meta:
         model = SweatShirt
-        fields = ['id', 'size', 'image']
+        fields = ['id', 'size', 'image','price']

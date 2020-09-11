@@ -1,9 +1,9 @@
 from django.urls import path, include
 
-from ..Application.GetAndPostDresses import GetAndPostDress
-from ..Application.PutAndDeleteDresses import PutAndDeleteDresses
+from ..Application.GetAndPostDresses import GetAndPost
+from ..Application.PutAndDeleteDresses import PutAndDelete
 
 urlpatterns = [
-    path('', GetAndPostDress.as_view(), name="dresses"),
-    path('<id>/' ,PutAndDeleteDresses.as_view(), name="dresses_details" )
+    path('', GetAndPost.as_view(), name="dresses"),
+    path('<id>/', PutAndDelete.as_view(), name="dresses_details")
 ]

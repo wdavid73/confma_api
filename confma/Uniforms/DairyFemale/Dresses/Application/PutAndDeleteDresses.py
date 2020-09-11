@@ -8,7 +8,7 @@ from django.http import Http404
 from ..Domain.ModelDresses import DressesUniform
 from ..Infrastructure.SerializerDresses import DressSerializer
 
-class PutAndDeleteDresses(APIView):
+class PutAndDelete(APIView):
     def get_object(self,id):
         try:
             return DressesUniform.objects.get(id=id)
