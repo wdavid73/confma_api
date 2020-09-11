@@ -8,11 +8,19 @@ from ..domain.ModelShields import Shields
 from ..infractructure.ShieldsSerializer import ShieldsSerializer
 
 
-class GetShields(APIView):
-    parser_class = (FileUploadParser)
+class GetAndPost(APIView):
+    parser_class = FileUploadParser
 
     def get(self, request: Request) -> Response:
         shields = Shields.objects.filter(state=1)
-        serializer = ShieldSerializer(
+        serializer = ShieldsSerializer(
             shields, many=True, context={'request': request})
         return Response({'shields': serializer.data})
+
+    def post(self, request: Request) -> Response:
+        serializer = ShieldsSerializer(
+            data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

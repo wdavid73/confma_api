@@ -1,7 +1,8 @@
 from django.urls import path, include
-from ..application.getShields import GetShields
+from ..application.GetAndPostShields import GetAndPost
+from ..application.PutAndDeleteShields import PutAndDelete
 
 urlpatterns = [
-    path('', GetShields.as_view(), name="shields"),
-
+    path('', GetAndPost.as_view(), name="shields"),
+    path('<id>/',PutAndDelete.as_view(), name="shields_detail")
 ]

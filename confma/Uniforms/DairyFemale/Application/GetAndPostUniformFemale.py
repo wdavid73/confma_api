@@ -9,7 +9,7 @@ from ..Infractructure.SerializerUniformFemale import UniformFemaleSerializer
 
 
 class GetAndPostUniformFemale(APIView):
-    parser_class = (FileUploadParser)
+    parser_class = FileUploadParser
 
     def get(self, request: Request) -> Response:
         uniforms = UniformsFemale.objects.filter(state=1)
