@@ -8,7 +8,7 @@ from ..Domain.ModelUniformMale import UniformsMale
 from ..Infractructure.SerializerUniformMale import UniformMaleSerializer
 
 
-class GetUniformsMale(APIView):
+class GetAndPost(APIView):
     parser_class = (FileUploadParser)
 
     def get(self, request: Request) -> Response:
@@ -16,3 +16,11 @@ class GetUniformsMale(APIView):
         serializer = UniformMaleSerializer(
             uniforms, many=True, context={'request': request})
         return Response({'uniforms_male': serializer.data})
+
+    def post(self, request: Request) -> Response:
+        serializer = UniformMaleSerializer(
+            data=request.data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

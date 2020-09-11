@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from ..Domain.ModelShirtsUniformMale import ShirtsUniformMale
+from ..Domain.ModelShirtsMale import ShirtsMale
 
 
 class ShirtsMaleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ShirtsUniformMale
+        model = ShirtsMale
         fields = ['id', 'size', 'image']
