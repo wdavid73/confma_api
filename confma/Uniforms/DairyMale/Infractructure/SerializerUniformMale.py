@@ -23,7 +23,7 @@ class UniformMaleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UniformsMale
-        fields = ['id', 'name_college''price','pants_id','pants','shirt_id','shirt']
+        fields = ['id', 'name_college','price','pants_id','pants','shirt_id','shirt']
 
         extra_kwargs = {
             "name_college": {

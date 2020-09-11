@@ -10,6 +10,8 @@ class UniformsSports(models.Model):
     name_college = models.CharField(max_length=100, null=False)
     type_uniform = models.CharField(
         max_length=10, null=False, blank=False, choices=list_type_uniform, default=1)
+    price = models.DecimalField(
+        max_digits=10, decimal_places=2, null=False, default=0)
     shirt = models.ForeignKey(ShirtsSports, on_delete=models.CASCADE, blank=False, null=False)
     sweat_shirt = models.ForeignKey(SweatShirt, on_delete=models.CASCADE, blank=False, null=False)
     state = models.SmallIntegerField(default=1, null=False)
