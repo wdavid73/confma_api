@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
+from django.urls import get_resolver
 urlconf = __import__(settings.ROOT_URLCONF, {}, {}, [''])
 
 
@@ -25,4 +26,4 @@ def get_endpoints(request: Request,) -> Response:
     list = []
     for p in ListEndpoints(urlconf.urlpatterns):
         list.append(''.join(p))
-    return Response({"endpoints": list}, status=status.HTTP_400_BAD_REQUEST)
+    return Response({"endpoints": list}, status=status.HTTP_200_OK)

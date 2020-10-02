@@ -5,6 +5,7 @@ list_size = ListSizeCloth()
 
 
 class PantsMale(models.Model):
+    ref = models.CharField(max_length=10, null=True,blank=False, default="ref")
     size = models.CharField(max_length=10, null=False,
                             blank=False, choices=list_size, default=1)
     price = models.DecimalField(
