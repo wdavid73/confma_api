@@ -8,7 +8,7 @@ from ..Shirts.Domain.ModelShirtsMale import ShirtsMale
 class UniformsMale(models.Model):
     name_college = models.CharField(max_length=100, null=False)
     price = models.DecimalField(
-        max_digits=10, decimal_places=2, null=False, default=0)
+        max_digits=10, decimal_places=2, null=False,blank=True, default=0)
     pants = models.ForeignKey(PantsMale,on_delete=models.CASCADE,blank=False,null=False)
     shirt = models.ForeignKey(ShirtsMale, on_delete=models.CASCADE, blank=False, null=False)
     state = models.SmallIntegerField(default=1, null=False)

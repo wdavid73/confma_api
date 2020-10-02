@@ -6,4 +6,4 @@ from ..Domain.ModelShirtsMale import ShirtsMale
 class ShirtsMaleSerializer(serializers.ModelSerializer):
     class Meta:
         model = ShirtsMale
-        fields = ['id', 'size', 'price','image']
+        fields = ['id',  'ref', 'size', 'price','image']
