@@ -1,10 +1,10 @@
 from rest_framework import serializers
 
 from ..Domain.ModelUniformFemale import UniformsFemale
-from ..Dresses.Infrastructure.SerializerDresses import DressSerializer
-from ..Dresses.Domain.ModelDresses import DressesUniform
-from ..Shirts.Infrastructure.SerializerShirstFemale import ShirtsFemaleSerializer
-from ..Shirts.Domain.ModelShirtsFemale import ShirtsFemale
+from ...Dresses.Infrastructure.SerializerDresses import DressSerializer
+from ...Dresses.Domain.ModelDresses import DressesUniform
+from ...Shirts.Infrastructure.SerializerShirts import ShirtsSerializer
+from ...Shirts.Domain.ModelShirts import Shirts
 
 
 class UniformFemaleSerializer(serializers.ModelSerializer):
@@ -15,10 +15,10 @@ class UniformFemaleSerializer(serializers.ModelSerializer):
         source='dress'
     )
 
-    shirt = ShirtsFemaleSerializer(read_only=True)
+    shirt = ShirtsSerializer(read_only=True)
     shirt_id = serializers.PrimaryKeyRelatedField(
         write_only=True,
-        queryset=ShirtsFemale.objects.filter(state=1),
+        queryset=Shirts.objects.filter(state=1 , type="Classic Female"),
         source='shirt'
     )
 

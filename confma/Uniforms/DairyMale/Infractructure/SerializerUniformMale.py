@@ -1,23 +1,23 @@
 from rest_framework import serializers
 
 from ..Domain.ModelUniformMale import UniformsMale
-from ..Shirts.Domain.ModelShirtsMale import ShirtsMale
-from ..Pants.Domain.ModelPantsMale import PantsMale
-from ..Shirts.Infrastructure.SerializerShirstMale import ShirtsMaleSerializer
-from ..Pants.Infrastructure.SerializerPantsMale import PantsMaleSerializer
+from ...Shirts.Domain.ModelShirts import Shirts
+from ...Pants.Domain.ModelPants import Pants
+from ...Shirts.Infrastructure.SerializerShirts import ShirtsSerializer
+from ...Pants.Infrastructure.SerializerPants import PantsSerializer
 
 class UniformMaleSerializer(serializers.ModelSerializer):
-    pants = PantsMaleSerializer(read_only = True)
+    pants = PantsSerializer(read_only = True)
     pants_id = serializers.PrimaryKeyRelatedField(
         write_only = True,
-        queryset=PantsMale.objects.filter(state=1),
+        queryset=Pants.objects.filter(state=1,type="Classic Male"),
         source="pants"
     )
 
-    shirt = ShirtsMaleSerializer(read_only=True)
+    shirt = ShirtsSerializer(read_only=True)
     shirt_id = serializers.PrimaryKeyRelatedField(
         write_only=True,
-        queryset=ShirtsMale.objects.filter(state=1),
+        queryset=Shirts.objects.filter(state=1,type="Classic Male"),
         source='shirt'
     )
 

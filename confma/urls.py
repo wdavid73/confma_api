@@ -11,7 +11,7 @@ urlpatterns = [
     path('quotations/', include('confma.Quotations.Domain.urls'), name="quotations"),
     path('quotations-clients/', include('confma.Quotations.QuotationClient.Domain.urls'),
          name="quotations-clients"),
-    path('uniforms/', include('confma.Uniforms.Domain.urls'), name="uniforms"),
+    path('uniforms/', include('confma.Uniforms.urls'), name="uniforms"),
     path('institutions/', include(
         'confma.Institution.Domain.urls'), name="institutions"),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))

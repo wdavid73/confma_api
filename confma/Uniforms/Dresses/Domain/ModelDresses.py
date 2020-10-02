@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from .....General.Application.list_general import ListSizeCloth
+from ....General.Application.list_general import ListSizeCloth
 list_size = ListSizeCloth()
 
 

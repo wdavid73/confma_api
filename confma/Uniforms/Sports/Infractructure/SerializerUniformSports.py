@@ -1,29 +1,31 @@
 from rest_framework import serializers
 
 from ..Domain.ModelUniformSports import UniformsSports
-from ..SweatShirt.Domain.ModelSweatShirt import SweatShirt
-from ..Shirts.Domain.ModelShirtsSports import ShirtsSports
-from ..SweatShirt.Infractructure.SerializerSweatShirtSport import SweatShirtSerializer
-from ..Shirts.Infractructure.SerializerShirstSport import ShirtsSportsSerializer
+from ...Shirts.Domain.ModelShirts import Shirts
+from ...Shirts.Infrastructure.SerializerShirts import ShirtsSerializer
+from ...Pants.Infrastructure.SerializerPants import PantsSerializer
+from ...Pants.Domain.ModelPants import Pants
+
 
 class UniformSportsSerializer(serializers.ModelSerializer):
-    shirt = ShirtsSportsSerializer(read_only = True)
+    shirt = ShirtsSerializer(read_only=True)
     shirt_id = serializers.PrimaryKeyRelatedField(
-            write_only = True,
-            queryset=ShirtsSports.objects.filter(state=1),
-            source="shirt"
-        )
+        write_only=True,
+        queryset=Shirts.objects.filter(state=1),
+        source="shirt"
+    )
 
-    sweat_shirt = SweatShirtSerializer(read_only = True)
-    sweat_shirt_id = serializers.PrimaryKeyRelatedField(
-            write_only = True,
-            queryset=SweatShirt.objects.filter(state=1),
-            source="sweat_shirt"
-        )
+    pants = PantsSerializer(read_only=True)
+    pants_id = serializers.PrimaryKeyRelatedField(
+        write_only=True,
+        queryset=Pants.objects.filter(state=1),
+        source="pants"
+    )
 
     class Meta:
         model = UniformsSports
-        fields = ['id', 'name_college','type_uniform','shirt','shirt_id','sweat_shirt','sweat_shirt_id']
+        fields = ['id', 'name_college', 'shirt',
+                  'shirt_id', 'pants', 'pants_id']
 
         extra_kwargs = {
             "name_college": {
