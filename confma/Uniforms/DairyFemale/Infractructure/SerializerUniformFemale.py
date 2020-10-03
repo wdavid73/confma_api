@@ -18,7 +18,7 @@ class UniformFemaleSerializer(serializers.ModelSerializer):
     shirt = ShirtsSerializer(read_only=True)
     shirt_id = serializers.PrimaryKeyRelatedField(
         write_only=True,
-        queryset=Shirts.objects.filter(state=1 , type="Classic Female"),
+        queryset=Shirts.objects.filter(state=1, type="Female"),
         source='shirt'
     )
 

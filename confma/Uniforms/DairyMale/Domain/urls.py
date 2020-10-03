@@ -5,6 +5,6 @@ from ..Application.FindByNameCollege import FindByNameCollege
 
 urlpatterns = [
     path('', GetAndPost.as_view(), name="uniforms"),
-    path('find/<str:name>/', FindByNameCollege, name="find_by_name_college"),
-    path('<id>/', PutAndDelete.as_view(),name="uniform_male_detail"),
+    path('find/<int:id>/', FindByNameCollege, name="find_by_name_college"),
+    path('<id>/', PutAndDelete.as_view(), name="uniform_male_detail"),
 ]

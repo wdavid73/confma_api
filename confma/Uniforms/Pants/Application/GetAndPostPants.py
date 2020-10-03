@@ -4,21 +4,21 @@ from rest_framework.parsers import FileUploadParser
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from ..Domain.ModelPantsMale import PantsMale
-from ..Infrastructure.SerializerPantsMale import PantsMaleSerializer
+from ..Domain.ModelPants import Pants
+from ..Infrastructure.SerializerPants import PantsSerializer
 
 
 class GetPantsUniformMale(APIView):
     parser_class = (FileUploadParser,)
 
     def get(self, request: Request) -> Response:
-        shirts = PantsMale.objects.filter(state=1)
-        serializer = PantsMaleSerializer(
+        shirts = Pants.objects.filter(state=1)
+        serializer = PantsSerializer(
             shirts, many=True, context={'request': request})
         return Response({'pants_male': serializer.data})
 
     def post(self, request: Request) -> Response:
-        serializer = PantsMaleSerializer(
+        serializer = PantsSerializer(
             data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()

@@ -15,18 +15,16 @@ def ListSizeCloth() -> List:
 
 def ListTypesPants() -> List:
     list_types = [
-        ('Classic Male', 'Classic Male'),
-        ('Classic Female', 'Classic Female'),
+        ('Male', 'Male'),
+        ('Female', 'Female'),
     ]
     return list_types
 
 
 def ListTypesShirts() -> List:
     list_types = [
-        ('Classic Male', 'Classic Male'),
-        ('Classic Female', 'Classic Female'),
-        ('Sport Male', 'Sport Male'),
-        ('Sport Female', 'Sport Female')
+        ('Male', 'Male'),
+        ('Female', 'Female'),
     ]
     return list_types
 

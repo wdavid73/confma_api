@@ -5,19 +5,20 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.http import Http404
 
-from ..Domain.ModelPantsMale import PantsMale
-from ..Infrastructure.SerializerPantsMale import PantsMaleSerializer
+from ..Domain.ModelPants import Pants
+from ..Infrastructure.SerializerPants import PantsSerializer
+
 
 class PutAndDelete(APIView):
     def get_object(self, id):
         try:
-            return PantsMale.objects.get(id=id)
-        except PantsMale.DoesNotExist:
+            return Pants.objects.get(id=id)
+        except Pants.DoesNotExist:
             raise Http404
 
     def put(self, request: Request, id: int) -> Response:
         uniform_female = self.get_object(id)
-        serializer = PantsMaleSerializer(
+        serializer = PantsSerializer(
             uniform_female, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
@@ -25,7 +26,7 @@ class PutAndDelete(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request: Request, id: int) -> Response:
-        from .....General.Application.delete import delete
-        if delete(PantsMale, id):
+        from ....General.Application.delete import delete
+        if delete(Pants, id):
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_400_BAD_REQUEST)

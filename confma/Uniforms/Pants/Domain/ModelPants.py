@@ -6,7 +6,7 @@ list_types_pants = ListTypesPants()
 
 
 class Pants(models.Model):
-    ref = models.CharField(max_length=10, null=True,
+    ref = models.CharField(max_length=50, null=True,
                            blank=False, default="ref")
     size = models.CharField(max_length=10, null=False,
                             blank=False, choices=list_size, default=1)
@@ -15,7 +15,7 @@ class Pants(models.Model):
     image = models.ImageField(
         upload_to='uniforms/Male/pants/%Y/%m/%d/', null=True)
     type = models.CharField(max_length=10, null=True,
-                            blank=True, choices=list_types_pants,default=1)
+                            blank=True, choices=list_types_pants, default=1)
     state = models.SmallIntegerField(default=1, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

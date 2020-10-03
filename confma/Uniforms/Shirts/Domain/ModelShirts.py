@@ -6,7 +6,7 @@ list_types_shirts = ListTypesShirts()
 
 
 class Shirts(models.Model):
-    ref = models.CharField(max_length=10, null=True,
+    ref = models.CharField(max_length=50, null=True,
                            blank=False, default="ref")
     size = models.CharField(max_length=10, null=False,
                             blank=False, choices=list_size, default=1)
