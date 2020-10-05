@@ -5,6 +5,8 @@ from ...Dresses.Infrastructure.SerializerDresses import DressSerializer
 from ...Dresses.Domain.ModelDresses import DressesUniform
 from ...Shirts.Infrastructure.SerializerShirts import ShirtsSerializer
 from ...Shirts.Domain.ModelShirts import Shirts
+from ....Institution.Domain.Institution import Institution
+from ....Institution.Infractructure.SerializerInstitution import SerializerInstitution
 
 
 class UniformFemaleSerializer(serializers.ModelSerializer):
@@ -13,6 +15,13 @@ class UniformFemaleSerializer(serializers.ModelSerializer):
         write_only=True,
         queryset=DressesUniform.objects.filter(state=1),
         source='dress'
+    )
+
+    institution = SerializerInstitution(read_only=True)
+    institution_id = serializers.PrimaryKeyRelatedField(
+        write_only=True,
+        queryset=Institution.objects.filter(state=1),
+        source="institution"
     )
 
     shirt = ShirtsSerializer(read_only=True)
@@ -24,7 +33,7 @@ class UniformFemaleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UniformsFemale
-        fields = ['id', 'name_college', 'price', 'dress_id',
+        fields = ['id', 'institution', 'institution_id', 'price', 'dress_id',
                   'dress', 'shirt_id', 'shirt']
 
         extra_kwargs = {

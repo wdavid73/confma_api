@@ -6,6 +6,6 @@ urlpatterns = [
     path('dairy_female/', include('confma.Uniforms.DairyFemale.Domain.urls')),
     path('shirts/', include('confma.Uniforms.Shirts.Domain.urls')),
     path('pants/', include('confma.Uniforms.Pants.Domain.urls')),
-    path('dreesses/', include('confma.Uniforms.Dresses.Domain.urls')),
+    path('dresses/', include('confma.Uniforms.Dresses.Domain.urls')),
     path('shields/', include('confma.Uniforms.Shields.domain.urls')),
 ]

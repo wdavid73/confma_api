@@ -7,4 +7,9 @@ __pycache__
 ## FOLDERS OF IDE JETBRANS AND VSCODE
 .idea
 .history
+.media/*
+.static/*
+
+#ARCHIVOS VARIOS
+db.sqlite3
 
