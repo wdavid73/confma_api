@@ -23,7 +23,10 @@ class GetAndPost(APIView):
 
     def post(self, request: Request):
         price = getPriceTotal(
-            request.data["dress_id"], request.data["shirt_id"])
+            request.data["dress_id"],
+            request.data["shirt_id"],
+            request.data["pants_id"]
+        )
         # PERMITE MODIFICAR O MUTAR CUALQUIER ATRIBUTO DEL QUERYDICT
         request.data._mutable = True
         request.data['price'] = price
@@ -37,7 +40,7 @@ class GetAndPost(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-def getPriceTotal(dress_id, shirt_id):
-    pants = get_object_or_404(DressesUniform, id=dress_id)
+def getPriceTotal(dress_id, shirt_id, pants_id):
     shirt = get_object_or_404(Shirts, id=shirt_id)
-    return pants.price + shirt.price
+    dress = get_object_or_404(DressesUniform, id=dress_id)
+    return dress.price + shirt.price
