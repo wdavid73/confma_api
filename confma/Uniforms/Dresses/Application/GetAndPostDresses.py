@@ -11,17 +11,17 @@ from ..Infrastructure.SerializerDresses import DressSerializer
 class GetAndPost(APIView):
     parser_class = (FileUploadParser,)
 
-    def get(self, request: Request) -> Response:
+    def get(self, request: Request):
         dresses = DressesUniform.objects.filter(state=1)
         serializer = DressSerializer(
             dresses, many=True, context={'request': request})
         return Response({'dresses': serializer.data})
 
-    def post(self,request: Request) -> Response:
+    def post(self, request: Request):
         serializer = DressSerializer(
-            data = request.data , context = {"request":request}
+            data=request.data, context={"request": request}
         )
         if serializer.is_valid():
             serializer.save()
-            return Response (serializer.data , status=status.HTTP_201_CREATED)
-        return Response (serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
