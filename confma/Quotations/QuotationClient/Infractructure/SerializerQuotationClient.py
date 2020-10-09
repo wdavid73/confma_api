@@ -1,9 +1,10 @@
 from rest_framework import serializers
 
-from ...Domain.ModelQuotation import QuotationClient,Quotation
+from ...Domain.ModelQuotation import QuotationClient, Quotation
 from ....Clients.Domain.ModelClient import Client
 from ...Infractructure.SerializerQuotation import QuotationSerializer
 from ....Clients.Infractructure.SerializerClient import ClientSerializer
+
 
 class QuotationClientSerializer(serializers.ModelSerializer):
     client = ClientSerializer(read_only=True, many=False)
@@ -36,10 +37,4 @@ class QuotationClientSerializer(serializers.ModelSerializer):
                         "required": "Please Select a Client for Save",
                     }
             },
-            "total": {
-                "error_messages":
-                    {
-                        "required": "Please Enter a Total of Quotation",
-                    }
-            }
         }
