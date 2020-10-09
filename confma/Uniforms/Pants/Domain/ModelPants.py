@@ -14,7 +14,7 @@ class Pants(models.Model):
         max_digits=10, decimal_places=2, null=False, default=0)
     image = models.ImageField(
         upload_to='uniforms/Male/pants/%Y/%m/%d/', null=True)
-    type = models.CharField(max_length=10, null=True,
+    type = models.CharField(max_length=20, null=True,
                             blank=True, choices=list_types_pants, default=1)
     state = models.SmallIntegerField(default=1, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
