@@ -31,7 +31,7 @@ class GetAndPost(APIView):
                                     status=status.HTTP_201_CREATED)
                 return Response(serializer.errors,
                                 status=status.HTTP_400_BAD_REQUEST)
-            return Response({'error': 'Esta prenda ya ah sido cotizada'},
+            return Response({'error': ['Esta prenda ya ah sido cotizada']},
                             status=status.HTTP_406_NOT_ACCEPTABLE)
         return Response({'error': ['peticion invalida']}, status=status.HTTP_400_BAD_REQUEST)
 

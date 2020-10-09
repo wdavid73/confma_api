@@ -28,3 +28,25 @@ def getShirtsFemale(request: Request):
         ).data for shirt in Shirts.objects.filter(state=1, type="Female")
     ]
     return Response({'shirts_female': response}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def getShirtsSportMale(request: Request):
+    response = [
+        ShirtsSerializer(
+            shirt,
+            context={'request': request}
+        ).data for shirt in Shirts.objects.filter(state=1, type="SportMale")
+    ]
+    return Response({'shirts_sport_male': response}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def getShirtsSportFemale(request: Request):
+    response = [
+        ShirtsSerializer(
+            shirt,
+            context={'request': request}
+        ).data for shirt in Shirts.objects.filter(state=1, type="SportFemale")
+    ]
+    return Response({'shirts_sport_female': response}, status=status.HTTP_200_OK)

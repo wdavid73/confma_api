@@ -17,6 +17,8 @@ def ListTypesPants() -> List:
     list_types = [
         ('Male', 'Male'),
         ('Female', 'Female'),
+        ('SportMale', 'SportMale'),
+        ('SportFemale', 'SportFemale'),
     ]
     return list_types
 
@@ -25,6 +27,8 @@ def ListTypesShirts() -> List:
     list_types = [
         ('Male', 'Male'),
         ('Female', 'Female'),
+        ('SportMale', 'SportMale'),
+        ('SportFemale', 'SportFemale'),
     ]
     return list_types
 

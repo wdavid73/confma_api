@@ -28,3 +28,25 @@ def getPantsFemale(request: Request):
         ).data for pants in Pants.objects.filter(state=1, type="Female")
     ]
     return Response({'pants_female': response}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def getPantsSportMale(request: Request):
+    response = [
+        PantsSerializer(
+            pants,
+            context={'request': request}
+        ).data for pants in Pants.objects.filter(state=1, type="SportMale")
+    ]
+    return Response({'pants_Sport_male': response}, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def getPantsSportFemale(request: Request):
+    response = [
+        PantsSerializer(
+            pants,
+            context={'request': request}
+        ).data for pants in Pants.objects.filter(state=1, type="SportFemale")
+    ]
+    return Response({'pants_sport_female': response}, status=status.HTTP_200_OK)
