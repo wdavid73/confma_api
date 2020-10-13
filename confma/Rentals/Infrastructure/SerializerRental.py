@@ -9,13 +9,13 @@ from ...Rentals.Domain.ModelRental import Rental
 
 class RentalSerializer(serializers.ModelSerializer):
     client = ClientSerializer(read_only=True)
-    clientId = serializers.PrimaryKeyRelatedField(
+    client_id = serializers.PrimaryKeyRelatedField(
         write_only=True,
         queryset=Client.objects.filter(state=1),
         source='client'
     )
     cloth = ClothSerializer(read_only=True)
-    clothId = serializers.PrimaryKeyRelatedField(
+    cloth_id = serializers.PrimaryKeyRelatedField(
         write_only=True,
         queryset=Cloth.objects.filter(state=1),
         source='cloth'
@@ -23,8 +23,8 @@ class RentalSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Rental
-        fields = ['id', 'date_return', 'date_now','price', 'ifrental',
-                  'cloth', 'clothId', 'client', 'clientId', ]
+        fields = ['id', 'date_return', 'date_now', 'price', 'ifrental',
+                  'cloth', 'cloth_id', 'client', 'client_id', ]
         extra_kwargs = {
             "price": {
                 "error_messages":

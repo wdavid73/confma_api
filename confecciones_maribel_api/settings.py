@@ -60,7 +60,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'confecciones_maribel_api/HomePage'),
+            os.path.join(BASE_DIR, 'confecciones_maribel_api'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

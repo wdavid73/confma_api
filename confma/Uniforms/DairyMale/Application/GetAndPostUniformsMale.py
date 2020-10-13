@@ -22,7 +22,9 @@ class GetAndPost(APIView):
 
     def post(self, request: Request):
         price = getPriceTotal(
-            request.data["pants_id"], request.data["shirt_id"])
+            request.data["pants_id"],
+            request.data["shirt_id"]
+        )
         # PERMITE MODIFICAR O MUTAR CUALQUIER ATRIBUTO DEL QUERYDICT
         request.data._mutable = True
         request.data['price'] = price

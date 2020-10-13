@@ -15,7 +15,7 @@ from ...Shirts.Domain.ModelShirts import Shirts
 class GetAndPost(APIView):
     parser_class = (FileUploadParser,)
 
-    def get(self, request: Request) -> Response:
+    def get(self, request: Request):
         uniforms = UniformsFemale.objects.filter(state=1)
         serializer = UniformFemaleSerializer(
             uniforms, many=True, context={'request': request})
@@ -23,7 +23,9 @@ class GetAndPost(APIView):
 
     def post(self, request: Request):
         price = getPriceTotal(
-            request.data["dress_id"], request.data["shirt_id"])
+            request.data["dress_id"],
+            request.data["shirt_id"],
+        )
         # PERMITE MODIFICAR O MUTAR CUALQUIER ATRIBUTO DEL QUERYDICT
         request.data._mutable = True
         request.data['price'] = price
@@ -38,6 +40,6 @@ class GetAndPost(APIView):
 
 
 def getPriceTotal(dress_id, shirt_id):
-    pants = get_object_or_404(DressesUniform, id=dress_id)
     shirt = get_object_or_404(Shirts, id=shirt_id)
-    return pants.price + shirt.price
+    dress = get_object_or_404(DressesUniform, id=dress_id)
+    return dress.price + shirt.price

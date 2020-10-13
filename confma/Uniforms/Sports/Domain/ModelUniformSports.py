@@ -6,10 +6,12 @@ from ....General.Application.list_general import ListTypeUniform
 from ....Institution.Domain.Institution import Institution
 list_type_uniform = ListTypeUniform()
 
+
 class UniformsSports(models.Model):
-    institution = models.ForeignKey(Institution,on_delete=models.CASCADE,blank=False,null=True)
+    institution = models.ForeignKey(
+        Institution, on_delete=models.CASCADE, blank=False, null=True)
     type_uniform = models.CharField(
-        max_length=10, null=False, blank=False, choices=list_type_uniform, default=1)
+        max_length=20, null=False, blank=False, choices=list_type_uniform, default=1)
     price = models.DecimalField(
         max_digits=10, decimal_places=2, null=False, default=0)
     shirt = models.ForeignKey(

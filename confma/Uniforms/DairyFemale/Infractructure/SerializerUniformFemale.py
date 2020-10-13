@@ -7,6 +7,8 @@ from ...Shirts.Infrastructure.SerializerShirts import ShirtsSerializer
 from ...Shirts.Domain.ModelShirts import Shirts
 from ....Institution.Domain.Institution import Institution
 from ....Institution.Infractructure.SerializerInstitution import SerializerInstitution
+from ...Pants.Domain.ModelPants import Pants
+from ...Pants.Infrastructure.SerializerPants import PantsSerializer
 
 
 class UniformFemaleSerializer(serializers.ModelSerializer):
@@ -14,7 +16,8 @@ class UniformFemaleSerializer(serializers.ModelSerializer):
     dress_id = serializers.PrimaryKeyRelatedField(
         write_only=True,
         queryset=DressesUniform.objects.filter(state=1),
-        source='dress'
+        source='dress',
+        allow_null=True
     )
 
     institution = SerializerInstitution(read_only=True)

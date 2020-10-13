@@ -2,10 +2,10 @@ from rest_framework import serializers
 
 from ..Domain.ModelUniformMale import UniformsMale
 from ...Shirts.Domain.ModelShirts import Shirts
-from ...Pants.Domain.ModelPants import Pants
-from ....Institution.Domain.Institution import Institution
 from ...Shirts.Infrastructure.SerializerShirts import ShirtsSerializer
+from ...Pants.Domain.ModelPants import Pants
 from ...Pants.Infrastructure.SerializerPants import PantsSerializer
+from ....Institution.Domain.Institution import Institution
 from ....Institution.Infractructure.SerializerInstitution import SerializerInstitution
 
 
