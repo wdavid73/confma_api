@@ -35,8 +35,8 @@ def ListTypesShirts() -> List:
 
 def ListTypeUniform() -> List:
     list_type = [
-        ("Female", 'Female'),
-        ("Male", "Male")
+        ("SportFemale", 'SportFemale'),
+        ("SportMale", "SportMale")
     ]
 
     return list_type

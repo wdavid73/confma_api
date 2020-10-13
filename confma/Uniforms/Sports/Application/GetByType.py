@@ -14,7 +14,7 @@ def getMale(request: Request):
         UniformSportsSerializer(
             male,
             context={'request': request}
-        ).data for male in UniformsSports.objects.filter(state=1, type_uniform="Male")
+        ).data for male in UniformsSports.objects.filter(state=1, type_uniform="SportMale")
     ]
     return Response({'uniforms_sports_male': response}, status=status.HTTP_200_OK)
 
@@ -25,6 +25,6 @@ def getFemale(request: Request):
         UniformSportsSerializer(
             female,
             context={'request': request}
-        ).data for female in UniformsSports.objects.filter(state=1, type_uniform="Female")
+        ).data for female in UniformsSports.objects.filter(state=1, type_uniform="SportFemale")
     ]
     return Response({'uniforms_sports_female': response}, status=status.HTTP_200_OK)

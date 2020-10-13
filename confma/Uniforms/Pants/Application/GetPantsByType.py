@@ -38,7 +38,7 @@ def getPantsSportMale(request: Request):
             context={'request': request}
         ).data for pants in Pants.objects.filter(state=1, type="SportMale")
     ]
-    return Response({'pants_Sport_male': response}, status=status.HTTP_200_OK)
+    return Response({'pants_sport_male': response}, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
