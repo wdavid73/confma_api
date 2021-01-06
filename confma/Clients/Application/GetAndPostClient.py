@@ -14,6 +14,7 @@ class GetAndPost(APIView):
         serializer = ClientSerializer(
             clients, many=True, context={'request': request})
         return Response({"clients": serializer.data}, status=status.HTTP_200_OK)
+        #return Response({"clients": "you access to clients endpoint"}, status=status.HTTP_200_OK)
 
     def post(self, request: Request):
         serializer = ClientSerializer(
